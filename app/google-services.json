@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1039778551065",
+    "project_id": "pelor-def4b",
+    "storage_bucket": "pelor-def4b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039778551065:android:f90ef3f46d6786186d6188",
+        "android_client_info": {
+          "package_name": "com.example.pelor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgRU__od_u8UQaSn4NTC2IrjJTW8mzXAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

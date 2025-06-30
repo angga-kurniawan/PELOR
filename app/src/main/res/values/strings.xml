@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pelor</string>
+    <string name="title_activity_login_sukses">ActivityLoginSukses</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
+</resources>
