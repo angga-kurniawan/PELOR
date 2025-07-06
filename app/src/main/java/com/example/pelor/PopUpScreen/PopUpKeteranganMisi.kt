@@ -109,6 +109,7 @@ fun PopUpKeteranganMisi(
                         content = {
                             Text(
                                 text = "Upload",
+                                color = Color.White,
                                 fontFamily = FontFamily(Font(R.font.protestrevolutionregular))
                             )
                         }

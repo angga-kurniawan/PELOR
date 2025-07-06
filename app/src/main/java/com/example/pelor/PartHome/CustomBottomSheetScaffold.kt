@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -42,17 +43,16 @@ fun CustomBottomSheetScaffold(
     val density = LocalDensity.current
     val coroutineScope = rememberCoroutineScope()
 
-    val screenHeightPx = with(receiver = density, block = { screenHeightDp.toPx() })
-    val peekHeightPx = with(receiver = density, block = { peekHeight.toPx() })
-    val halfHeightPx = with(receiver = density, block = { halfHeight.toPx() })
-    val sheetHeightPx = with(receiver = density, block = { sheetHeight.toPx() })
+    val screenHeightPx = with(density) { screenHeightDp.toPx() }
+    val peekHeightPx = with(density) { peekHeight.toPx() }
+    val halfHeightPx = with(density) { halfHeight.toPx() }
+    val sheetHeightPx = with(density) { sheetHeight.toPx() }
 
     val fullOffset = screenHeightPx - sheetHeightPx
     val halfOffset = screenHeightPx - halfHeightPx
     val miniOffset = screenHeightPx - peekHeightPx
 
     val offsetY = remember { Animatable(miniOffset) }
-
 
     val expandToFull: () -> Unit = {
         coroutineScope.launch {
@@ -68,54 +68,52 @@ fun CustomBottomSheetScaffold(
 
     onExpandRequest?.invoke(expandToFull, collapseSheet)
 
+    val surfaceColor = MaterialTheme.colorScheme.surface
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .systemBarsPadding(),
-        content = {
-            mainContent()
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 80.dp, end = 16.dp),
-                contentAlignment = Alignment.BottomEnd,
-                content = {
-                    floatingActionButton()
-                }
-            )
+            .systemBarsPadding()
+    ) {
+        mainContent()
 
-            Box(
-                modifier = Modifier
-                    .offset { IntOffset(0, offsetY.value.toInt()) }
-                    .fillMaxWidth()
-                    .height(sheetHeight)
-                    .background(
-                        color = Color.White,
-                        shape = RoundedCornerShape(topStart = 5.dp, topEnd = 5.dp)
-                    )
-                    .draggable(
-                        orientation = Orientation.Vertical,
-                        state = rememberDraggableState { delta ->
-                            coroutineScope.launch {
-                                val newOffset =
-                                    (offsetY.value + delta).coerceIn(fullOffset, miniOffset)
-                                offsetY.snapTo(newOffset)
-                            }
-                        },
-                        onDragStopped = {
-                            coroutineScope.launch {
-                                val positions = listOf(fullOffset, halfOffset, miniOffset)
-                                val nearest =
-                                    positions.minByOrNull { abs(it - offsetY.value) } ?: miniOffset
-                                offsetY.animateTo(nearest)
-                            }
-                        }
-                    ),
-                content = {
-                    val isExpanded = offsetY.value <= halfOffset
-                    sheetContent(isExpanded)
-                }
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 80.dp, end = 16.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            floatingActionButton()
         }
-    )
+
+        Box(
+            modifier = Modifier
+                .offset { IntOffset(0, offsetY.value.toInt()) }
+                .fillMaxWidth()
+                .height(sheetHeight)
+                .background(
+                    color = surfaceColor,
+                    shape = RoundedCornerShape(topStart = 5.dp, topEnd = 5.dp)
+                )
+                .draggable(
+                    orientation = Orientation.Vertical,
+                    state = rememberDraggableState { delta ->
+                        coroutineScope.launch {
+                            val newOffset = (offsetY.value + delta).coerceIn(fullOffset, miniOffset)
+                            offsetY.snapTo(newOffset)
+                        }
+                    },
+                    onDragStopped = {
+                        coroutineScope.launch {
+                            val positions = listOf(fullOffset, halfOffset, miniOffset)
+                            val nearest = positions.minByOrNull { abs(it - offsetY.value) } ?: miniOffset
+                            offsetY.animateTo(nearest)
+                        }
+                    }
+                )
+        ) {
+            val isExpanded = offsetY.value <= halfOffset
+            sheetContent(isExpanded)
+        }
+    }
 }

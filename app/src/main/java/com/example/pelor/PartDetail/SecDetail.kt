@@ -14,21 +14,23 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.pelor.R
-import com.example.pelor.gemifikasi.kategoriDetails
+import com.example.pelor.gemifikasi.getKategoriDetails
 
 @Composable
 fun SecDetail(
@@ -36,6 +38,8 @@ fun SecDetail(
     onClose: () -> Unit,
     navController: NavController?
 ) {
+    val context = LocalContext.current
+    val kategoriDetails = remember { getKategoriDetails(context) }
     val filteredItemsWithCategory = kategoriDetails
         .flatMap { kategori ->
             kategori.items.map { item ->
@@ -48,91 +52,92 @@ fun SecDetail(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp),
+            .padding(horizontal = 15.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        content = {
-            Text(
-                text = title,
-                fontSize = 17.sp
-            )
-            IconButton(
-                onClick = onClose,
-                content = {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .background(color = Color(0x4DD8D8D8)),
-                        content = {
-                            Icon(
-                                modifier = Modifier
-                                    .size(30.dp)
-                                    .padding(3.dp),
-                                painter = painterResource(R.drawable.baseline_close_24),
-                                contentDescription = null,
-                                tint = Color(0xFFD8D8D8)
-                            )
-                        }
-                    )
-                }
-            )
-        }
-    )
-    Spacer(modifier = Modifier.height(15.dp))
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp),
-        content = {
-            items(filteredItemsWithCategory) { (sejarahItem, category) ->
-                Text(
-                    text = category,
-                    color = Color(0xFF7D7D7D)
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                CompImage(navController = navController, title = title)
-                Spacer(modifier = Modifier.height(30.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = {
-                        Text(
-                            modifier = Modifier.weight(0.3f),
-                            text = "Sejarah mengenai ${sejarahItem.title}:",
-                            fontWeight = FontWeight.Bold
-                        )
-                        IconButton(
-                            modifier = Modifier
-                                .padding(start = 50.dp),
-                            onClick = {
-
-                            },
-                            content = {
-                                Box(
-                                    modifier = Modifier
-                                        .background(Color(0x3DD9D9D9))
-                                        .fillParentMaxSize(),
-                                    contentAlignment = Alignment.Center,
-                                    content = {
-                                        Icon(
-                                            modifier = Modifier.size(15.dp),
-                                            painter = painterResource(R.drawable.iconsound),
-                                            contentDescription = null,
-                                            tint = Color(0xFF5B85CE)
-                                        )
-                                    }
-                                )
-                            }
-                        )
-                    }
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    modifier = Modifier.padding(bottom = 30.dp),
-                    text = sejarahItem.sejarah
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        IconButton(onClick = onClose) {
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .padding(3.dp),
+                    painter = painterResource(R.drawable.baseline_close_24),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
-    )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 15.dp)
+    ) {
+        items(filteredItemsWithCategory) { (sejarahItem, category) ->
+            Text(
+                text = category,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            CompImage(navController = navController, title = title)
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    modifier = Modifier.weight(0.3f),
+                    text = "${stringResource(R.string.sejarah_next)} ${sejarahItem.title}:",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                IconButton(
+                    modifier = Modifier.padding(start = 50.dp),
+                    onClick = { /* TODO */ }
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
+                            .fillParentMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(15.dp),
+                            painter = painterResource(R.drawable.iconsound),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                text = sejarahItem.sejarah,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 30.dp)
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)

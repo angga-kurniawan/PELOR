@@ -1,6 +1,8 @@
 package com.example.pelor.gemifikasi
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import com.example.pelor.R
 
 data class Kegiatan(
@@ -9,22 +11,25 @@ data class Kegiatan(
     @DrawableRes val icon: Int
 )
 
-val daftarKegiatan = listOf(
-    Kegiatan(
-        judul = "LAGENDA PULAU PENYENGAT",
-        aktivitas = mapOf(
-            "Berkunjung ke Masjid Sultan Riau" to "Kamu Harus Menuju Ke Masjid Sultan RIau dan foto di sana untuk bisa mendapatkan XP",
-            "Berkunjung ke Istana Kantor" to "Kamu Harus Menuju ke Istana Kantor dan foto di sana untuk bisa mendapatkan XP",
-            "Berkunjung ke Makam Raja Ali Haji" to "Kamu Harus Menuju Ke Makam Raja Ali Haji dan foto di sana untuk bisa mendapatkan XP",
+@Composable
+fun getDaftarKegiatan(): List<Kegiatan> {
+    return listOf(
+        Kegiatan(
+            judul = stringResource(R.string.kegiatan_judul_lagenda),
+            aktivitas = mapOf(
+                stringResource(R.string.aktivitas_masjid) to stringResource(R.string.deskripsi_masjid),
+                stringResource(R.string.aktivitas_balai) to stringResource(R.string.deskripsi_balai),
+                stringResource(R.string.aktivitas_makam) to stringResource(R.string.deskripsi_makam),
+            ),
+            icon = R.drawable.topengmisi
         ),
-        icon =  R.drawable.topengmisi
-    ),
-    Kegiatan(
-        judul = "PENJELAJAH MEDIA",
-        aktivitas = mapOf(
-             "Unggah 4 foto tempat bersejarah dari Pulau Penyengat" to "Unggah 4 foto tempat bersejarah dari Pulau Penyengat"
-        ),
-        icon = R.drawable.iconprimarymisi2
+        Kegiatan(
+            judul = stringResource(R.string.kegiatan_judul_penjelajah),
+            aktivitas = mapOf(
+                stringResource(R.string.aktivitas_foto_sejarah) to stringResource(R.string.deskripsi_foto_sejarah)
+            ),
+            icon = R.drawable.iconprimarymisi2
+        )
     )
-)
+}
 

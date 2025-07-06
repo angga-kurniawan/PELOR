@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,39 +30,44 @@ fun CardDialogCharPerson(
     time: String = "20:00",
     person: Boolean = true
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
+    val backgroundBubble = if (person) {
+        colorScheme.primary.copy(alpha = 0.14f)
+    } else {
+        colorScheme.primary.copy(alpha = 0.05f)
+    }
+
+    val textColor = colorScheme.onSurface
+    val timeColor = colorScheme.onSurface.copy(alpha = 0.6f)
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = if (person) 50.dp else 0.dp, end = if (person) 0.dp else 50.dp),
-        contentAlignment = if (person) Alignment.CenterEnd else Alignment.CenterStart,
-        content = {
-            Column(
-                horizontalAlignment = if (person) Alignment.End else Alignment.Start,
-                content = {
-                    Text(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(if (person) Color(0x24368bf4) else Color(0x0d368bf4))
-                            .padding(
-                                start = 20.dp,
-                                end = 20.dp,
-                                top = 10.dp,
-                                bottom = 10.dp
-                            ),
-                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                        text = input
-                    )
-                    Text(
-                        modifier = Modifier.padding(start = 5.dp, top = 5.dp),
-                        text = time,
-                        fontSize = 10.sp,
-                        color = Color.Gray,
-                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                    )
-                }
+        contentAlignment = if (person) Alignment.CenterEnd else Alignment.CenterStart
+    ) {
+        Column(
+            horizontalAlignment = if (person) Alignment.End else Alignment.Start
+        ) {
+            Text(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(backgroundBubble)
+                    .padding(horizontal = 20.dp, vertical = 10.dp),
+                fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                color = textColor,
+                text = input
+            )
+            Text(
+                modifier = Modifier.padding(start = 5.dp, top = 5.dp),
+                text = time,
+                fontSize = 10.sp,
+                color = timeColor,
+                fontFamily = FontFamily(Font(R.font.poppinsreguler))
             )
         }
-    )
+    }
 }
 
 @Preview(showBackground = true)

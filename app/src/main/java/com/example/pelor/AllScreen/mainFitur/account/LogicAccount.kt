@@ -6,9 +6,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 object LogicAccount {
     fun getUserData(
         onSuccess: (UserData) -> Unit,
-        onError: (String) -> Unit
+        onError: (String) -> Unit,
+        uid: String?
     ) {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
+
         if (uid == null) {
             onError("User belum login")
             return

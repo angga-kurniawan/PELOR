@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pelor</string>
+    <string name="title_activity_login_sukses">ActivityLoginSukses</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="indonesia">Indonesian</string>
+    <string name="inggris">English</string>
+    <string name="china">马来语</string>
+    <string name="dialog_title_level_up">🎉 恭喜你升级了！</string>
+    <string name="dialog_message_level_up">你已升级！继续保持努力完成任务吧 💪</string>
+    <string name="dialog_button_ok">好的</string>
+    <string name="toast_upload_success">✅ 经验值已成功添加</string>
+    <string name="toast_upload_failed">❌ 上传失败</string>
+    <string name="toast_logout_success">退出登录成功</string>
+    <string name="popup_mission_reward_info">完成后可获得 2500 点经验值！</string>
+    <string name="adventure_rank">冒险等级</string>
+    <string name="exit_dialog_question_part1">你确定要</string>
+    <string name="exit_dialog_question_logout">退出登录吗？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="tab_profile">个人资料</string>
+    <string name="tab_background">背景</string>
+    <string name="tab_title">称号</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_cancel">取消</string>
+    <string name="username_empty_placeholder">用户名不能为空</string>
+    <string name="selected">已选择</string>
+    <string name="toast_success_save">保存成功</string>
+    <string name="kegiatan_judul_lagenda">彭亨岛传奇</string>
+    <string name="kegiatan_judul_penjelajah">媒体探险家</string>
+    <string name="aktivitas_masjid">参观苏丹廖清真寺</string>
+    <string name="aktivitas_balai">参观马来风情厅</string>
+    <string name="aktivitas_makam">参观拉贾·阿里·哈吉陵墓</string>
+    <string name="deskripsi_masjid">你必须前往苏丹廖清真寺并拍照以获取经验值</string>
+    <string name="deskripsi_balai">你必须前往马来风情厅并拍照以获取经验值</string>
+    <string name="deskripsi_makam">你必须前往拉贾·阿里·哈吉陵墓并拍照以获取经验值</string>
+    <string name="aktivitas_foto_sejarah">上传 4 张彭亨岛历史遗迹照片</string>
+    <string name="deskripsi_foto_sejarah">请上传 4 张彭亨岛历史遗迹照片以完成任务</string>
+    <string name="pengaturan">设置</string>
+    <string name="bahasa">语言</string>
+    <string name="bahasa_sub">印尼语</string>
+    <string name="tema">主题</string>
+    <string name="ubah_password">更改密码</string>
+    <string name="tentang_kami">关于我们</string>
+    <string name="keluar">退出登录</string>
+    <string name="gagal_memuat_gambar">加载图片失败：%1$s</string>
+    <string name="lihat_semua">查看全部</string>
+    <string name="tambahkan_foto">添加照片</string>
+    <string name="sejarah_next">了解更多历史：</string>
+    <string name="kategori_sejarah">历史</string>
+    <string name="kategori_penginapan">住宿</string>
+    <string name="kategori_event_agenda">活动与日程</string>
+    <string name="kategori_restoran">餐饮</string>
+    <string name="title_balai_adat" translatable="false">Balai Adat Melayu</string>
+    <string name="title_benteng_kursi" translatable="false">Benteng Bukit Kursi</string>
+    <string name="title_gedung_tabib" translatable="false">Gedung Tabib</string>
+    <string name="title_makam_engku_putri" translatable="false">Makam Engku Putri</string>
+    <string name="title_makam_raja_ali_haji" translatable="false">Makam Raja Ali Haji</string>
+    <string name="title_masjid_raya" translatable="false">Masjid Raya Sultan Riau</string>
+    <string name="title_rumah_hakim" translatable="false">Rumah Hakim</string>
+    <string name="sejarah_balai_adat">彭亨岛上的马来风情厅是传统民俗与文化活动的中心。它是长者、社区代表及居民举办传统仪式、协商与其他文化活动的聚会场所。建筑融入大量富有哲理的木雕装饰，是马来风格的典型代表。
+
+作为传统保存的象征，马来风情厅对延续代代相传的高尚价值观具有重要意义。在这里，社区的重要决策通过协商达成共识。
+
+此外，这里还是年轻一代接受马来民俗、历史与道德教育的非正式教学场所，是一座重要的文化教育机构。
+
+直到今天，马来风情厅依然见证社区对文化遗产的坚守与传承，不仅是历史的沉默见证，也在日常生活中继续发挥作用。</string>
+    <string name="sejarah_benteng_kursi">Benteng Bukit Kursi 坐落在彭亨岛一座小山丘上，是廖清真腊王朝时期的历史遗物。这门大炮曾用于抵御海盗和入侵者的攻击。
+
+大炮朝向大海，表明其在王国防御体系中的重要地位。作为武器以外，它还象征着马来人民保卫家园的抗争与勇气。
+
+至今，这门大炮仍静静矗立，是历史的见证，吸引游客亲眼见证当地抵抗史迹，并欣赏山丘上的海景。
+
+这门大炮提醒年轻一代，保卫国家主权与尊严需要奋勇拼搏的精神。</string>
+    <string name="sejarah_gedung_tabib">Gedung Tabib（御医楼）是廖清真腊王朝时期的重要设施，兼作传统健康服务中心和宫廷御医的住所。御医们擅长马来传统疗法，如草药、按摩及其他自然疗法。
+
+建筑融合中东元素，与马来传统风格相结合，显示出早期公共卫生体系已相当完善。御医通常受选自具深厚祖传医疗知识的人才。
+
+如今，这幢御医楼保存完好，是历史与文化的瑰宝，证明自古时代公共健康即受高度重视。
+
+参观御医楼有助于理解马来社会如何将传统医学融入日常生活，并认可御医在维护公共健康中的角色。</string>
+    <string name="sejarah_makam_engku_putri">Engku Putri陵墓是 Engku Putri Raja Hamidah 的安息地，她是苏丹 Mahmud Syah III 的妻子，以智慧与威望著称，对马来宗教与文化发展有所贡献。她曾协助建造宏伟的苏丹廖大清真寺，并在传播伊斯兰价值观及习俗方面发挥重要角色。
+
+她的陵墓坐落在贵族墓园，被具有马来风格的结构保护。当地人及游客常来此学习这位伟大女性的历史影响。
+
+Engku Putri象征马来女性的力量，代表着历史上女性不可忽视的贡献。她的陵墓提醒后人铭记女性在马来史与文化中的角色。
+
+前往 Engku Putri陵墓朝圣，也可思考她在塑造彭亨岛社区文化与精神认同过程中的贡献。</string>
+    <string name="sejarah_makam_raja_ali_haji">Raja Ali Haji 是马来文化史上极具影响力的知识分子，著有著名文学作品《双调十二》，并且是第一位系统整理标准马来语的人物，为现代印尼语奠定基础。
+
+他的陵墓位于彭亨岛，他在那里花费大量时间进行写作与教学。Raja Ali Haji 致力通过文字与教育维护马来身份，也曾担任宫廷文学与政策顾问。
+
+Raja Ali Haji陵墓现为备受尊敬的文化遗址，吸引众多研究者、学生与游客前往。
+
+他的陵墓象征着卓越的智慧与文学遗产，对印尼民族文化认同具有深远影响。</string>
+    <string name="sejarah_masjid_raya">苏丹廖大清真寺建于1803年，由苏丹 Mahmud Syah III 与彭亨岛社区共同完成。它的特色在于采用蛋清混合物作为粘合剂，反映了当时创新的传统建筑技术。
+
+这座黄色主调的清真寺不仅是祈祷场所，也是伊斯兰教育与传播的中心，吸引多位学者传授宗教、文学与哲理。
+
+此外，清真寺拥有13个穹顶与4座尖塔，象征一天与一夜共13个诵礼周期。内部还藏有手写古兰经，彰显对知识与教育的重视。
+
+如今，这座清真寺作为文化遗产受到政府与社区的保护，也成为宗教旅行的热门景点。</string>
+    <string name="sejarah_rumah_hakim">Rumah Hakim（法官之家）曾是廖清真腊王朝期间王宫法官的官邸，同时也是审理传统习俗案件的法庭所在地。
+
+房屋为高脚屋结构，装饰丰富木雕，体现出马来贵族住宅的宏伟。它象征着当时已建立起基于习俗与公正的法律系统，法官被视为社区中受尊敬的中心人物。
+
+法官之家体现出马来文明对司法与正义的高度重视，早于殖民时代便已建立完善与人性化的法律制度。这里也曾是年轻一代接受传统法律教育的场所。
+
+参观此地，有助于理解马来社会如何依据习俗价值执行法律并维护正义。</string>
+    <string name="popup_success_title">成功</string>
+    <string name="popup_failed_title">失败</string>
+    <string name="popup_success_default_keterangan">操作已成功完成。</string>
+    <string name="popup_failed_default_keterangan">处理数据时发生错误。</string>
+    <string name="preview_title">图像预览</string>
+    <string name="back_button_description">返回按钮</string>
+    <string name="uploading_message">分析图像中…</string>
+    <string name="upload_failed_message">图像分析失败，请重试。</string>
+</resources>

@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pelor.R
 
 @Composable
-fun PopUpSucsses(keterangan: Boolean) {
+fun PopUpSucsses(status: Boolean,keterangan: String = "") {
     Box(
         modifier = Modifier
             .border(width = 1.dp, color = Color(0xFFB9B9B9), shape = RoundedCornerShape(10.dp))
@@ -44,13 +45,13 @@ fun PopUpSucsses(keterangan: Boolean) {
                 content = {
                     Icon(
                         modifier = Modifier.size(70.dp),
-                        painter = painterResource(if (keterangan) R.drawable.iconsuccses else R.drawable.iconfailed),
+                        painter = painterResource(if (status) R.drawable.iconsuccses else R.drawable.iconfailed),
                         contentDescription = null,
-                        tint = if (keterangan) Color(0xff72e102) else Color.Red
+                        tint = if (status) Color(0xff72e102) else Color.Red
                     )
                     Spacer(modifier = Modifier.padding(5.dp))
                     Text(
-                        text = if (keterangan) "Succses" else "Failed",
+                        text = if (status) stringResource(R.string.popup_success_title) else stringResource(R.string.popup_failed_title),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily(Font(R.font.poppinsreguler)),
@@ -71,7 +72,7 @@ private fun PopUpSucssesPrev() {
         verticalArrangement = Arrangement.Center,
         content = {
             PopUpSucsses(
-                keterangan = false
+                status = false
             )
         }
     )

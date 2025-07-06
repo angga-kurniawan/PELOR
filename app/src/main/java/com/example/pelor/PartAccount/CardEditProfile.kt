@@ -36,13 +36,13 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,6 +58,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
@@ -67,12 +68,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.pelor.AllScreen.mainFitur.account.LogicAccount
+import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.R
 import com.example.pelor.Service.ProfileRepository
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 @SuppressLint("RememberReturnType")
@@ -88,7 +89,11 @@ fun CardEditProfile(
         "1" to R.drawable.bg_baal_with_shadow
     )
     val focusManager = LocalFocusManager.current
-    val tabs = listOf("Profil", "Latar Belakang", "Gelar")
+    val tabs = listOf(
+        stringResource(R.string.tab_profile),
+        stringResource(R.string.tab_background),
+        stringResource(R.string.tab_title)
+    )
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     var userName by remember { mutableStateOf(name) }
@@ -98,6 +103,10 @@ fun CardEditProfile(
     val titleMap = remember { mutableStateOf<Map<String, String>>(emptyMap()) }
     var selectedtitle by remember { mutableStateOf(title) }
     val context = LocalContext.current
+    val toastJikaBerhasilSave = stringResource(R.string.toast_success_save)
+    val uidFlow = remember { UserPreferences(context).uid }
+    val uid by uidFlow.collectAsState(initial = null)
+
     LaunchedEffect(true) {
         ProfileRepository.fetchProfiles(
             onSuccess = {
@@ -132,14 +141,14 @@ fun CardEditProfile(
             focusManager = focusManager,
             onClickBack = onClickBack,
             onSave = { username, avatarUrl, selectedTitle ->
-                val currentUserId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
+                val currentUserId = uid.orEmpty()
                 LogicAccount.updateUserProfile(
                     userId = currentUserId,
                     username = username,
                     profil = avatarUrl,
                     title = selectedTitle,
                     onSuccess = {
-                        Toast.makeText(context, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, toastJikaBerhasilSave, Toast.LENGTH_SHORT).show()
                         onClickBack()
                     },
                     onError = {
@@ -188,29 +197,31 @@ fun HeaderSection(
             .background(Color.DarkGray)
     ) {
         Image(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(16f / 9f),
             painter = painterResource(R.drawable.bg_baal_with_shadow),
             contentDescription = null,
-            contentScale = ContentScale.FillWidth
+            contentScale = ContentScale.Crop
         )
 
         Column {
             Row(modifier = Modifier.padding(top = 20.dp, start = 10.dp)) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Image(
-                            modifier = Modifier.size(120.dp),
-                            painter = painterResource(R.drawable.bgprofile),
-                            contentDescription = null
-                        )
-                        AsyncImage(
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .border(2.dp, Color.White, CircleShape)
-                                .size(100.dp),
-                            contentDescription = null,
-                            model = selectedAvatar
-                        )
-                    }
+                Box(contentAlignment = Alignment.Center) {
+                    Image(
+                        modifier = Modifier.size(120.dp),
+                        painter = painterResource(R.drawable.bgprofile),
+                        contentDescription = null
+                    )
+                    AsyncImage(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .border(2.dp, Color.White, CircleShape)
+                            .size(100.dp),
+                        contentDescription = null,
+                        model = selectedAvatar
+                    )
+                }
 
                 Column {
                     Box(modifier = Modifier.padding(horizontal = 10.dp)) {
@@ -228,7 +239,7 @@ fun HeaderSection(
                                 onValueChange = onNameChange,
                                 placeholder = {
                                     Text(
-                                        "UserName Tidak Boleh Kosong",
+                                        stringResource(R.string.username_empty_placeholder),
                                         color = Color.Red,
                                         maxLines = 1,
                                         fontSize = 10.sp
@@ -267,7 +278,9 @@ fun HeaderSection(
                 }
             }
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = 25.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 25.dp),
                 horizontalArrangement = Arrangement.End,
                 content = {
                     Button(
@@ -279,7 +292,7 @@ fun HeaderSection(
                             containerColor = Color.Black.copy(alpha = 0.5f)
                         ),
                         content = {
-                            Text(text = "Simpan")
+                            Text(text = stringResource(R.string.btn_save), color = Color.White)
                         }
                     )
                     Spacer(modifier = Modifier.padding(5.dp))
@@ -292,7 +305,7 @@ fun HeaderSection(
                             containerColor = Color.Black.copy(alpha = 0.5f)
                         ),
                         content = {
-                            Text(text = "Batal")
+                            Text(text = stringResource(R.string.btn_cancel), color = Color.White)
                         }
                     )
                 }
@@ -419,7 +432,7 @@ fun AvatarGridPage(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Check,
-                            contentDescription = "Terpilih",
+                            contentDescription = stringResource(R.string.selected),
                             tint = Color.Green.copy(alpha = 0.6f),
                             modifier = Modifier.size(48.dp)
                         )
@@ -466,6 +479,8 @@ fun GelarEdit(
                     Box(
                         modifier = Modifier
                             .matchParentSize()
+                            .padding(vertical = 3.dp, horizontal = 5.dp)
+                            .clip(RoundedCornerShape(10.dp))
                             .background(Color.Black.copy(alpha = 0.6f)),
                         contentAlignment = Alignment.Center
                     ) {
@@ -482,12 +497,14 @@ fun GelarEdit(
                     Box(
                         modifier = Modifier
                             .matchParentSize()
+                            .padding(vertical = 3.dp, horizontal = 5.dp)
+                            .clip(RoundedCornerShape(10.dp))
                             .background(Color.Black.copy(alpha = 0.4f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Default.Check,
-                            contentDescription = "Terpilih",
+                            contentDescription = stringResource(R.string.selected),
                             tint = Color.Green.copy(alpha = 0.6f),
                             modifier = Modifier.size(48.dp)
                         )
@@ -552,7 +569,7 @@ fun BgEdit(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Check,
-                            contentDescription = "Terpilih",
+                            contentDescription = stringResource(R.string.selected),
                             tint = Color.Green.copy(alpha = 0.6f),
                             modifier = Modifier.size(48.dp)
                         )
@@ -581,5 +598,10 @@ private fun GelarEditPrev() {
 @Preview(showBackground = true)
 @Composable
 private fun CardEditProfilePrev() {
-    CardEditProfile(level = "1", name = "angga", title = "Peneliti Sejarah Pemula", imageUrl = "", onClickBack = {})
+    CardEditProfile(
+        level = "1",
+        name = "angga",
+        title = "Peneliti Sejarah Pemula",
+        imageUrl = "",
+        onClickBack = {})
 }
