@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,13 +28,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,7 +57,12 @@ fun SignUpScreen(navController: NavController) {
     var nameError by remember { mutableStateOf<String?>(null) }
     var emailError by remember { mutableStateOf<String?>(null) }
     var passwordError by remember { mutableStateOf<String?>(null) }
+    var registerError by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val colorScheme = MaterialTheme.colorScheme
+    val isDarkTheme = isSystemInDarkTheme()
+    val backgroundAlpha = if (isDarkTheme) 0.2f else 1f
 
     fun validateName(value: String) {
         userName = value
@@ -76,190 +86,207 @@ fun SignUpScreen(navController: NavController) {
             else -> null
         }
     }
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-        content = {
-            Icon(
-                modifier = Modifier
-                    .padding(top = 70.dp)
-                    .align(Alignment.TopCenter)
-                    .size(width = 162.23.dp, height = 143.26.dp),
-                painter = painterResource(R.drawable.logopelor),
-                contentDescription = "",
-                tint = Color(0xFF368BF4)
-            )
 
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorScheme.background),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(top = 70.dp)
+                .align(Alignment.TopCenter)
+                .size(width = 162.23.dp, height = 143.26.dp),
+            painter = painterResource(R.drawable.logopelor),
+            contentDescription = "",
+            tint = colorScheme.primary
+        )
+
+        Image(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .height(363.dp),
+            painter = painterResource(R.drawable.wave),
+            contentDescription = "",
+            contentScale = ContentScale.FillBounds
+        )
+
+        Box(contentAlignment = Alignment.TopCenter) {
             Image(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .height(height = 363.dp),
-                painter = painterResource(R.drawable.wave),
+                    .width(336.dp)
+                    .height(430.dp).alpha(backgroundAlpha),
+                painter = painterResource(R.drawable.bgsignup),
                 contentDescription = "",
                 contentScale = ContentScale.FillBounds
             )
 
-            Box(
-                contentAlignment = Alignment.TopCenter,
-                content = {
-                    Image(
-                        modifier = Modifier
-                            .width(width = 336.dp)
-                            .height(height = 430.dp),
-                        painter = painterResource(R.drawable.bgsignup),
-                        contentDescription = "",
-                        contentScale = ContentScale.FillBounds
-                    )
-                    Column(
-                        modifier = Modifier
-                            .padding(top = 50.dp)
-                            .width(270.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        content = {
-                            CustomTextField(
-                                title = "Username",
-                                value = userName,
-                                placeholder = "Your Name",
-                                isError = nameError != null,
-                                onValueChange = { userName -> validateName(userName) }
-                            )
-                            nameError?.let {
-                                Text(
-                                    text = it,
-                                    color = Color.Red,
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.padding(start = 8.dp)
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(20.dp))
-                            CustomTextField(
-                                title = "Email",
-                                value = email,
-                                placeholder = "Exempel@gmail.com",
-                                isError = emailError != null,
-                                onValueChange = { validateEmail(it) }
-                            )
-                            emailError?.let {
-                                Text(
-                                    text = it,
-                                    color = Color.Red,
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.padding(start = 8.dp)
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(20.dp))
-                            CustomTextField(
-                                title = "Password",
-                                value = password,
-                                placeholder = "Password",
-                                isError = passwordError != null,
-                                visualTransformation = PasswordVisualTransformation(),
-                                trailingIcon = {
-                                    val image = if (passwordVisible)
-                                        R.drawable.outline_visibility_24
-                                    else R.drawable.outline_visibility_off_24
-                                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                                        Icon(
-                                            modifier = Modifier
-                                                .size(20.dp),
-                                            painter = painterResource(image),
-                                            contentDescription = if (passwordVisible) "Hide password" else "Show password",
-                                            tint = Color(0xFF368BF4)
-                                        )
-                                    }
-                                },
-                                onValueChange = { validatePassword(it) }
-                            )
-                            passwordError?.let {
-                                Text(
-                                    text = it,
-                                    color = Color.Red,
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.padding(start = 8.dp)
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(30.dp))
-                            Box(
-                                modifier = Modifier
-                                    .clickable {
-                                        validateName(userName)
-                                        validateEmail(email)
-                                        validatePassword(password)
-                                        if (nameError == null && emailError == null && passwordError == null) {
-                                            isLoading = true
-                                            register(
-                                                username = userName,
-                                                email = email,
-                                                password = password,
-                                                onSuccess = {
-                                                    Log.d("RegisterDebug", "Success callback jalan")
-                                                    isLoading = false
-                                                    navController.popBackStack()
-                                                },
-                                                onError = { error ->
-                                                    Log.e("RegisterDebug", "Error callback jalan: $error")
-                                                    isLoading = false
-                                                    emailError = error
-                                                }
-                                            )
-                                        }
-                                    }
-                                    .clip(shape = RoundedCornerShape(5.dp))
-                                    .background(
-                                        color = Color(0xFF368BF4)
-                                    )
-                                    .width(width = 280.dp)
-                                    .height(height = 48.dp),
-                                contentAlignment = Alignment.Center,
-                                content = {
-                                    if (isLoading) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(24.dp),
-                                            color = Color.White
-                                        )
-                                    } else {
-                                        Text(
-                                            text = "REGISTRASI",
-                                            color = Color.White,
-                                            textAlign = TextAlign.Center,
-                                            fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                        )
-                                    }
-                                }
-                            )
-                            Spacer(modifier = Modifier.height(30.dp))
-                            Row(
-                                content = {
-                                    Text(
-                                        text = "have an account? ",
-                                        color = Color(0x54000000),
-                                        fontSize = 10.sp,
-                                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                    )
-                                    Text(
-                                        text = "Sign In",
-                                        color = Color(0xA81200B9),
-                                        fontSize = 10.sp,
-                                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                    )
-                                }
-                            )
-                        }
+            Column(
+                modifier = Modifier
+                    .padding(top = 50.dp)
+                    .width(270.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CustomTextField(
+                    title = "Username",
+                    value = userName,
+                    placeholder = "Your Name",
+                    isError = nameError != null,
+                    onValueChange = { validateName(it) }
+                )
+                nameError?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(start = 8.dp)
                     )
                 }
-            )
-            Text(
-                modifier = Modifier
-                    .padding(bottom = 20.dp)
-                    .align(Alignment.BottomCenter),
-                text = "DewiPupe ©2025",
-                fontSize = 8.sp,
-                color = Color(0xFFFFFFFF),
-                fontFamily = FontFamily(Font(R.font.poppinsreguler))
-            )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                CustomTextField(
+                    title = "Email",
+                    value = email,
+                    placeholder = "Exempel@gmail.com",
+                    isError = emailError != null,
+                    onValueChange = { validateEmail(it) }
+                )
+                emailError?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                CustomTextField(
+                    title = "Password",
+                    value = password,
+                    placeholder = "Password",
+                    isError = passwordError != null,
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (passwordVisible)
+                            R.drawable.outline_visibility_24
+                        else
+                            R.drawable.outline_visibility_off_24
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(
+                                modifier = Modifier.size(20.dp),
+                                painter = painterResource(id = image),
+                                contentDescription = if (passwordVisible) "Hide password" else "Show password",
+                                tint = colorScheme.primary
+                            )
+                        }
+                    },
+                    onValueChange = { validatePassword(it) }
+                )
+                passwordError?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(5.dp))
+                        .background(colorScheme.primary)
+                        .clickable {
+                            validateName(userName)
+                            validateEmail(email)
+                            validatePassword(password)
+                            registerError = null
+
+                            if (nameError == null && emailError == null && passwordError == null) {
+                                isLoading = true
+                                register(
+                                    username = userName,
+                                    email = email,
+                                    password = password,
+                                    onSuccess = {
+                                        isLoading = false
+                                        navController.popBackStack()
+                                    },
+                                    onError = { error ->
+                                        isLoading = false
+                                        registerError = error
+                                    },
+                                    context = context
+                                )
+                            }
+                        }
+                        .width(280.dp)
+                        .height(48.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (isLoading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            color = colorScheme.onPrimary
+                        )
+                    } else {
+                        Text(
+                            text = "REGISTRASI",
+                            color = colorScheme.onPrimary,
+                            textAlign = TextAlign.Center,
+                            fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                        )
+                    }
+                }
+
+                registerError?.let {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = it,
+                        color = colorScheme.error,
+                        fontSize = 12.sp,
+                        modifier = Modifier.align(Alignment.Start)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Row {
+                    Text(
+                        text = "Have an account? ",
+                        color = colorScheme.onBackground,
+                        fontSize = 10.sp,
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                    )
+                    Text(
+                        modifier = Modifier.clickable {
+                            navController.popBackStack()
+                        },
+                        text = "Sign In",
+                        color = colorScheme.secondary,
+                        fontSize = 10.sp,
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                    )
+                }
+            }
         }
-    )
+
+        Text(
+            modifier = Modifier
+                .padding(bottom = 20.dp)
+                .align(Alignment.BottomCenter),
+            text = "DewiPupe ©2025",
+            fontSize = 8.sp,
+            color = colorScheme.onBackground,
+            fontFamily = FontFamily(Font(R.font.poppinsreguler))
+        )
+    }
 }
 
 @Preview(showBackground = true)

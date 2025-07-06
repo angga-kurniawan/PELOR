@@ -1,20 +1,23 @@
 package com.example.pelor.Service
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
+import com.example.pelor.AuthPreferences
+import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 object AuthLoginAndRegistrasi {
-    val auth = FirebaseAuth.getInstance()
+    val auth: FirebaseAuth = FirebaseAuth.getInstance()
     @SuppressLint("StaticFieldLeak")
-    val db = FirebaseFirestore.getInstance()
+    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     fun login(
+        context: Context,
         email: String,
         password: String,
         onSuccess: () -> Unit,
@@ -23,7 +26,14 @@ object AuthLoginAndRegistrasi {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("Login", "Login berhasil")
+                    val uid = FirebaseAuth.getInstance().currentUser?.uid
+                    if (uid != null) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            AuthPreferences(context).setLoggedIn(true)
+                            UserPreferences(context).saveUid(uid)
+                        }
+                        Log.d("Login", "Login sukses UID: $uid")
+                    }
                     onSuccess()
                 } else {
                     val errorMessage = when (val exception = task.exception) {
@@ -38,6 +48,7 @@ object AuthLoginAndRegistrasi {
     }
 
     fun register(
+        context: Context,
         username: String,
         email: String,
         password: String,
@@ -64,11 +75,14 @@ object AuthLoginAndRegistrasi {
                     "pengguna" to "pengembara"
                 )
 
-                db.collection("users")
-                    .document(uid)
-                    .set(userMap)
+                db.collection("users").document(uid).set(userMap)
                     .addOnSuccessListener {
                         Log.d("Register", "Registrasi berhasil dan data disimpan.")
+
+                        CoroutineScope(Dispatchers.IO).launch {
+                            AuthPreferences(context).setLoggedIn(true)
+                        }
+
                         onSuccess()
                     }
                     .addOnFailureListener { e ->
@@ -89,11 +103,16 @@ object AuthLoginAndRegistrasi {
     }
 
     fun logout(
+        context: Context,
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
         try {
             auth.signOut()
+            CoroutineScope(Dispatchers.IO).launch {
+                AuthPreferences(context).setLoggedIn(false)
+                UserPreferences(context).clearUid()
+            }
             onSuccess()
         } catch (e: Exception) {
             Log.e("LogoutError", "Gagal logout", e)

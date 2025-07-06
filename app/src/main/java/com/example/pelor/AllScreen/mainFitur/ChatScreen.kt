@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -27,18 +28,20 @@ import com.example.pelor.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(navController: NavController? = null) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Scaffold(
         topBar = {
             TopAppBar(
                 modifier = Modifier.border(
                     width = 1.dp,
                     shape = RoundedCornerShape(bottomStart = 5.dp, bottomEnd = 5.dp),
-                    color = Color(0x7AA5A5A5)
+                    color = colorScheme.outline.copy(alpha = 0.3f)
                 ),
                 title = {
                     Text(
                         text = "Chat",
-                        color = Color(0xFF323232),
+                        color = colorScheme.onSurface,
                         fontSize = 15.sp,
                         fontFamily = FontFamily(Font(R.font.poppinsreguler))
                     )
@@ -47,25 +50,24 @@ fun ChatScreen(navController: NavController? = null) {
                     IconButton(
                         onClick = {
                             navController?.popBackStack()
-                        },
-                        content = {
-                            Icon(
-                                modifier = Modifier.size(20.dp),
-                                painter = painterResource(R.drawable.baseline_arrow_back_24),
-                                contentDescription = "",
-                                tint = Color(0xFF878787)
-                            )
                         }
-                    )
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            painter = painterResource(R.drawable.baseline_arrow_back_24),
+                            contentDescription = null,
+                            tint = colorScheme.onSurfaceVariant
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.White
+                    containerColor = colorScheme.surface
                 )
             )
         },
         content = { paddingValues ->
             SecChat(
-                modifier = Modifier.padding(paddingValues = paddingValues),
+                modifier = Modifier.padding(paddingValues),
                 navController = navController
             )
         }

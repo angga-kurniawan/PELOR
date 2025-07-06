@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,35 +25,36 @@ import com.example.pelor.R
 @Composable
 fun SecNameAndCode(
     userName: String = "UserName",
-    code: String = "001",
-    textColor: Color = Color.Black
+    code: String = "001"
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+    val textColor = colorScheme.onBackground
+    val dotColor = colorScheme.onBackground.copy(alpha = 0.7f)
+
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        content = {
-            Text(
-                text = userName,
-                fontSize = 12.sp,
-                fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                color = textColor
-            )
-            Spacer(modifier = Modifier.padding(3.dp))
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(3.dp)
-                    .background(Color.Black),
-                content = { }
-            )
-            Spacer(modifier = Modifier.padding(3.dp))
-            Text(
-                color = textColor,
-                fontSize = 12.sp,
-                text = code,
-                fontFamily = FontFamily(Font(R.font.poppinsreguler))
-            )
-        }
-    )
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = userName,
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+            color = textColor
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(3.dp)
+                .background(dotColor)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = code,
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+            color = textColor
+        )
+    }
 }
 
 @Preview

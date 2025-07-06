@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,100 +43,88 @@ fun CardPersonCard(
     code: String,
     time: String
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Box(
         modifier = Modifier
-            .clickable {
-                onClick()
-            }
+            .clickable { onClick() }
             .fillMaxWidth()
             .height(75.dp)
-            .background(
-                Color(0xFFFCFCFC)
-            ),
-        contentAlignment = Alignment.CenterStart,
-        content = {
-            Row(
-                modifier = Modifier
-                    .padding(start = 10.dp, end = 10.dp)
-                    .fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically,
-                content = {
-                    Box(
-                        modifier = Modifier.size(55.dp),
-                        content = {
-                            Image(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .clip(CircleShape),
-                                painter = painter,
-                                contentDescription = "",
-                                contentScale = ContentScale.FillBounds
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .padding(end = 3.dp, bottom = 3.dp)
-                                    .clip(shape = CircleShape)
-                                    .size(10.dp)
-                                    .background(Color.Green)
-                                    .align(Alignment.BottomEnd)
-                            )
-                        }
-                    )
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        content = {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                content = {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        content = {
-                                            Text(
-                                                text = name,
-                                                color = Color(0xFF323232),
-                                                fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                            )
-                                            Box(
-                                                modifier = Modifier
-                                                    .padding(
-                                                        start = 10.dp,
-                                                        end = 10.dp
-                                                    )
-                                                    .clip(shape = CircleShape)
-                                                    .size(5.dp)
-                                                    .background(Color(0xFF323232))
-                                            )
-                                            Text(
-                                                text = code,
-                                                fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                            )
-                                        }
-                                    )
-                                    Text(
-                                        text = time,
-                                        fontSize = 12.sp,
-                                        color = Color(0xFF848484),
-                                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                                    )
-                                }
-                            )
-                            Spacer(modifier = Modifier.size(3.dp))
-                            Text(
-                                text = chat,
-                                color = Color(0xFF888888),
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.poppinsreguler))
-                            )
-                        }
+            .background(colorScheme.surface),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.size(55.dp)
+            ) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape),
+                    painter = painter,
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds
+                )
+                Box(
+                    modifier = Modifier
+                        .padding(end = 3.dp, bottom = 3.dp)
+                        .clip(CircleShape)
+                        .size(10.dp)
+                        .background(Color.Green)
+                        .align(Alignment.BottomEnd)
+                )
+            }
+            Column(
+                modifier = Modifier.padding(10.dp),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = name,
+                            color = colorScheme.onSurface,
+                            fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                        )
+                        Box(
+                            modifier = Modifier
+                                .padding(horizontal = 10.dp)
+                                .clip(CircleShape)
+                                .size(5.dp)
+                                .background(colorScheme.onSurface.copy(alpha = 0.5f))
+                        )
+                        Text(
+                            text = code,
+                            color = colorScheme.onSurface,
+                            fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                        )
+                    }
+                    Text(
+                        text = time,
+                        fontSize = 12.sp,
+                        color = colorScheme.onSurface.copy(alpha = 0.6f),
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
                     )
                 }
-            )
+                Spacer(modifier = Modifier.size(3.dp))
+                Text(
+                    text = chat,
+                    color = colorScheme.onSurfaceVariant,
+                    fontSize = 12.sp,
+                    fontFamily = FontFamily(Font(R.font.poppinsreguler))
+                )
+            }
         }
-    )
-    HorizontalDivider()
+    }
+    HorizontalDivider(color = colorScheme.outline.copy(alpha = 0.2f))
 }
 
 @Preview

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pelor</string>
+    <string name="title_activity_login_sukses">ActivityLoginSukses</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="indonesia">Indonesian</string>
+    <string name="inggris">English</string>
+    <string name="china">China</string>
+    <string name="dialog_title_level_up">🎉 Congratulations!</string>
+    <string name="dialog_message_level_up">You`ve leveled up! Keep up the spirit in completing missions 💪</string>
+    <string name="dialog_button_ok">Ok</string>
+    <string name="toast_upload_success">✅ XP successfully added</string>
+    <string name="toast_upload_failed">❌ Upload failed</string>
+    <string name="toast_logout_success">Logout Success</string>
+    <string name="popup_mission_reward_info">You will get 2500 XP if you succeed!</string>
+    <string name="adventure_rank">Adventure Rank</string>
+    <string name="exit_dialog_question_part1">Are you sure you want to </string>
+    <string name="exit_dialog_question_logout">Log Out </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="tab_profile">Profile</string>
+    <string name="tab_background">Background</string>
+    <string name="tab_title">Title</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="username_empty_placeholder">Username Cannot Be Empty</string>
+    <string name="selected">Selected</string>
+    <string name="toast_success_save">Successfully saved</string>
+    <string name="kegiatan_judul_lagenda">LEGEND OF PENYENGAT ISLAND</string>
+    <string name="kegiatan_judul_penjelajah">MEDIA EXPLORER</string>
+    <string name="aktivitas_masjid">Visit Sultan Riau Mosque</string>
+    <string name="aktivitas_balai">Visit Malay Customary Hall</string>
+    <string name="aktivitas_makam">Visit Raja Ali Haji`s Tomb</string>
+    <string name="deskripsi_masjid">You must go to Sultan Riau Mosque and take a photo there to get XP</string>
+    <string name="deskripsi_balai">You must go to Malay Customary Hall and take a photo there to get XP</string>
+    <string name="deskripsi_makam">You must go to Raja Ali Haji`s Tomb and take a photo there to get XP</string>
+    <string name="aktivitas_foto_sejarah">Upload 4 photos of historical sites from Penyengat Island</string>
+    <string name="deskripsi_foto_sejarah">Upload 4 photos of historical sites from Penyengat Island</string>
+    <string name="pengaturan">Settings</string>
+    <string name="bahasa">Language</string>
+    <string name="bahasa_sub">Indonesian</string>
+    <string name="tema">Theme</string>
+    <string name="ubah_password">Change Password</string>
+    <string name="tentang_kami">About Us</string>
+    <string name="keluar">Log Out</string>
+    <string name="gagal_memuat_gambar">Failed to load image: %1$s</string>
+    <string name="lihat_semua">See All</string>
+    <string name="tambahkan_foto">Add Photo</string>
+    <string name="sejarah_next">History about </string>
+    <string name="kategori_sejarah">History</string>
+    <string name="kategori_penginapan">Accommodation</string>
+    <string name="kategori_event_agenda">Events &amp; Agenda</string>
+    <string name="kategori_restoran">Restaurant</string>
+    <string name="title_balai_adat" translatable="false">Balai Adat Melayu</string>
+    <string name="title_benteng_kursi" translatable="false">Benteng Bukit Kursi</string>
+    <string name="title_gedung_tabib" translatable="false">Gedung Tabib</string>
+    <string name="title_makam_engku_putri" translatable="false">Makam Engku Putri</string>
+    <string name="title_makam_raja_ali_haji" translatable="false">Makam Raja Ali Haji</string>
+    <string name="title_masjid_raya" translatable="false">Masjid Raya Sultan Riau</string>
+    <string name="title_rumah_hakim" translatable="false">Rumah Hakim</string>
+    <string name="sejarah_balai_adat">The Malay Customary Hall on Penyengat Island is a center for traditional customs and cultural activities of the Malay community. This building serves as a gathering place for elders, community leaders, and residents to hold various traditional ceremonies, deliberations, and other cultural activities. Its architecture reflects the typical Malay style with wood carvings rich in philosophical meaning.
+
+As a symbol of tradition preservation, the Malay Customary Hall plays an important role in maintaining the continuity of noble values inherited from generation to generation. Here, various important decisions related to customs and community life are made through consensus.
+
+In addition to its social and cultural functions, the Malay Customary Hall also serves as an informal education center where young generations are taught about Malay customs, history, and moral values. This makes the hall a vital cultural education institution.
+
+The existence of the Malay Customary Hall to this day shows the commitment of the Penyengat Island community to preserve their cultural heritage. This hall is not only a silent witness to history but also continues to live as part of the daily life of the community.</string>
+    <string name="sejarah_benteng_kursi">Meriam Bukit Kursi is a historical relic from the era of the Riau-Lingga Sultanate located on a hill on Penyengat Island. This cannon was once used as a primary defense tool against attacks from invaders and pirates who often targeted the Sultanate`s waters.
+
+The strategic position of the cannon facing the sea indicates the importance of this location in the kingdom`s defense system. In addition to its function as a weapon, this cannon also symbolizes the resistance and bravery of the Malay people in defending their homeland.
+
+To this day, Meriam Bukit Kursi remains a silent witness to the struggle and is often visited by tourists who wish to see firsthand the historical traces of local resistance. Its location on the hill also offers a beautiful panorama of the open sea.
+
+The presence of this cannon reminds the younger generation of the importance of the spirit of struggle and patriotism in defending the sovereignty and honor of the nation.</string>
+    <string name="sejarah_gedung_tabib">The Physician`s Building was an important facility during the Riau-Lingga Sultanate era, used as a traditional healthcare service center. This building served as both a residence and a practice place for royal physicians skilled in traditional Malay medicine, including herbal remedies, massage, and other natural therapies.
+
+Built in a distinctive Malay architectural style combining Middle Eastern elements, this building is evidence that the public health system was organized even before the era of modernization. The physicians working in this building were usually chosen individuals with extensive knowledge of ancestral medical science.
+
+Today, the Physician`s Building is an important part of historical and cultural preservation, showing that public health has been a primary concern since ancient times. Its well-preserved building remains a silent witness to the development of traditional medicine on Penyengat Island.
+
+A visit to the Physician`s Building provides insight into how the Malay community integrated traditional medical knowledge into their daily lives and appreciated the role of physicians in maintaining public health.</string>
+    <string name="sejarah_makam_engku_putri">Engku Putri`s Tomb is the final resting place of Engku Putri Raja Hamidah, wife of Sultan Mahmud Syah III, who was widely known as a wise and authoritative woman who played a significant role in the development of Malay religion and culture. She was known for her role in the construction of the magnificent Sultan Riau Grand Mosque and was an important figure in the preservation of Islamic values and customs.
+
+Her tomb is located in the noble cemetery complex and is surrounded by protective structures adorned with distinctive Malay ornaments. This tomb is often visited by local communities and tourists who wish to learn more about this great woman in the history of the Riau-Lingga Sultanate.
+
+Engku Putri symbolizes the strength of women in Malay history and is remembered for her everlasting services. The existence of this tomb reminds us of the important role of women in Malay history and culture.
+
+A pilgrimage to Engku Putri`s Tomb provides an opportunity to reflect on her contributions in shaping the cultural and spiritual identity of the Malay community on Penyengat Island.</string>
+    <string name="sejarah_makam_raja_ali_haji">Raja Ali Haji is one of the most influential intellectual figures in Malay cultural history. He was the author of the famous literary work "Gurindam Dua Belas", and the first figure to systematize standard Malay language, which later became the foundation of modern Indonesian.
+
+His tomb is located on Penyengat Island, where he spent much time writing and teaching. Raja Ali Haji was known for his dedication to upholding Malay identity through his writings and education. He also served as a royal advisor in literary and policy matters.
+
+The Raja Ali Haji tomb complex is now a highly respected cultural heritage site often visited by researchers, students, and tourists. The existence of this tomb symbolizes the extraordinary intellectual richness and literary heritage for the Indonesian nation.
+
+Visiting this tomb pays homage to a figure who made significant contributions to the development of Malay language and literature, and strengthened the nation`s cultural identity.</string>
+    <string name="sejarah_masjid_raya">The Sultan Riau Grand Mosque is a historic mosque built in 1803 by Sultan Mahmud Syah III along with the community of Penyengat Island. The uniqueness of this mosque lies in its building material, which uses a mixture of egg whites as an adhesive, reflecting an innovative traditional construction technique of its time.
+
+This mosque is not only a place of worship but also a center for Islamic education and dakwah. This yellow-dominated mosque has become the spiritual icon of Penyengat Island and a symbol of the glory of the Riau-Lingga Sultanate in spreading Islam. In this mosque, religious knowledge, literature, and philosophy were taught by prominent scholars.
+
+Furthermore, this mosque has a unique architecture with 13 domes and 4 minarets symbolizing the number of prayer cycles (rakaat) in a day and night. Inside the mosque, there is also a handwritten Al-Qur`an, which serves as proof of concern for knowledge and education.
+
+The Sultan Riau Grand Mosque is now a cultural heritage site preserved by the government and local community and is an attractive religious tourist destination for visitors from various regions.</string>
+    <string name="sejarah_rumah_hakim">The Judge`s House was the official residence of royal court officials during the Riau-Lingga Sultanate era, playing an important role in upholding traditional Malay customary law. This house not only served as a residence but also as a courtroom for settling various customary cases.
+
+Its architecture reflects the grandeur of a Malay noble`s house with its stilt house structure and wood carvings full of philosophy. This house symbolizes that a system of law and justice had been orderly implemented at that time, with the judge as a respected central figure in the community.
+
+The existence of the Judge`s House shows that Malay civilization highly valued justice and had implemented a neat and humane legal system long before colonial influence arrived. This house also served as a traditional law education center for the younger generation.
+
+Visiting the Judge`s House provides an understanding of how the Malay community managed its judicial system and enforced laws based on customary values and justice.</string>
+    <string name="popup_success_title">Success</string>
+    <string name="popup_failed_title">Failed</string>
+    <string name="popup_success_default_keterangan">Operation completed successfully.</string>
+    <string name="popup_failed_default_keterangan">An error occurred while processing data.</string>
+    <string name="preview_title">Image Preview</string>
+    <string name="back_button_description">Back button</string>
+    <string name="uploading_message">Analyzing image…</string>
+    <string name="upload_failed_message">Failed to analyze image. Please try again.</string>
+</resources>

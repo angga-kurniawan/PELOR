@@ -4,6 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Timestamp
@@ -74,11 +78,10 @@ object ProfileRepository {
 
     fun fetchDriver(
         onSuccess: (List<DriverWithUser>) -> Unit,
-        onError: (String) -> Unit
+        onError: (String) -> Unit,
+        currentUserId: String? = null
     ) {
-        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
         val resultList = mutableListOf<DriverWithUser>()
-
         db.collection("driver")
             .get()
             .addOnSuccessListener { driverDocs ->
@@ -104,8 +107,10 @@ object ProfileRepository {
                         val user =
                             User(username = username, email = email, profil = profil, uid = uid)
 
-                        if (uid != currentUserId) {
+                        if (uid.isNotBlank() && uid != currentUserId) {
                             resultList.add(DriverWithUser(driver, user))
+                        } else {
+                            Log.d("FILTER_UID", "Skipped UID: $uid | Current: $currentUserId")
                         }
                     }
 
@@ -343,20 +348,37 @@ object ProfileRepository {
             }
     }
 
-    fun addXpToUser(amount: Int, onSuccess: () -> Unit = {}, onError: (String) -> Unit = {}) {
+    fun addXpToUser(
+        amount: Int,
+        onSuccess: (Boolean) -> Unit = {},
+        onError: (String) -> Unit = {}
+    ) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val userRef =
 
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { snapshot ->
-                    val currentXp = snapshot.getLong("xp")?.toInt() ?: 0
-                    db.collection("users").document(uid).update("xp", currentXp + amount)
-                        .addOnSuccessListener { onSuccess() }
-                        .addOnFailureListener { onError(it.message ?: "Gagal update XP") }
-                }
-                .addOnFailureListener {
-                    onError(it.message ?: "Gagal mengambil data user")
-                }
+        val userRef = db.collection("users").document(uid)
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(userRef)
+            val currentXp = snapshot.getLong("xp") ?: 0
+            val currentLevel = snapshot.getLong("level") ?: 1
+
+            val totalXp = currentXp + amount
+            val calculatedLevel = (totalXp / 10000).toInt()
+            val sisaXp = (totalXp % 10000).toInt()
+            val newLevel = currentLevel.toInt() + calculatedLevel
+
+            val isLevelUp = calculatedLevel > 0
+
+            transaction.update(userRef, mapOf(
+                "xp" to sisaXp,
+                "level" to newLevel
+            ))
+
+            isLevelUp // return value
+        }.addOnSuccessListener { isLevelUp ->
+            onSuccess(isLevelUp)
+        }.addOnFailureListener {
+            onError(it.message ?: "Gagal update XP & level")
+        }
     }
 }
 

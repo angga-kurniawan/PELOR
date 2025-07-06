@@ -4,4 +4,145 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <!--language-->
+    <string name="indonesia">Indonesia</string>
+    <string name="inggris">Inggris</string>
+    <string name="china">China</string>
+    <!--MainActivity-->
+    <string name="dialog_title_level_up">🎉 Selamat!</string>
+    <string name="dialog_message_level_up">Kamu telah naik level! Terus semangat menyelesaikan misinya 💪</string>
+    <string name="dialog_button_ok">Oke</string>
+    <string name="toast_upload_success">✅ XP berhasil ditambahkan</string>
+    <string name="toast_upload_failed">❌ Gagal mengupload</string>
+    <string name="toast_logout_success">Logout Succses</string>
+    <!--ScreenACCount-->
+    <string name="popup_mission_reward_info">Kamu akan mendapatkan 2500 XP jika berhasil!</string>
+    <!--CardAccount-->
+    <string name="adventure_rank">Adventure Rank</string>
+    <!--CardAlerDialog-->
+    <string name="exit_dialog_question_part1">Kamu Yakin Mau </string>
+    <string name="exit_dialog_question_logout">LogOut </string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <!--CardEditProfile-->
+    <string name="tab_profile">Profil</string>
+    <string name="tab_background">Latar Belakang</string>
+    <string name="tab_title">Gelar</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="username_empty_placeholder">UserName Tidak Boleh Kosong</string>
+    <string name="selected">Terpilih</string>
+    <string name="toast_success_save">Berhasil disimpan</string>
+    <!--ContainMission-->
+    <!-- Judul Kegiatan -->
+    <string name="kegiatan_judul_lagenda">LAGENDA PULAU PENYENGAT</string>
+    <string name="kegiatan_judul_penjelajah">PENJELAJAH MEDIA</string>
+
+    <!-- Aktivitas untuk LAGENDA PULAU PENYENGAT -->
+    <string name="aktivitas_masjid">Berkunjung ke Masjid Sultan Riau</string>
+    <string name="aktivitas_balai">Berkunjung ke Balai Adat Melayu</string>
+    <string name="aktivitas_makam">Berkunjung ke Makam Raja Ali Haji</string>
+
+    <string name="deskripsi_masjid">Kamu Harus Menuju Ke Masjid Sultan RIau dan foto di sana untuk bisa mendapatkan XP</string>
+    <string name="deskripsi_balai">Kamu Harus Menuju ke Balai Adat Melayu dan foto di sana untuk bisa mendapatkan XP</string>
+    <string name="deskripsi_makam">Kamu Harus Menuju Ke Makam Raja Ali Haji dan foto di sana untuk bisa mendapatkan XP</string>
+
+    <!-- Aktivitas untuk PENJELAJAH MEDIA -->
+    <string name="aktivitas_foto_sejarah">Unggah 4 foto tempat bersejarah dari Pulau Penyengat</string>
+    <string name="deskripsi_foto_sejarah">Unggah 4 foto tempat bersejarah dari Pulau Penyengat</string>
+    <!--SecSettings-->
+    <string name="pengaturan">Pengaturan</string>
+    <string name="bahasa">Bahasa</string>
+    <string name="bahasa_sub">Indonesia</string>
+    <string name="tema">Tema</string>
+    <string name="ubah_password">Ubah Password</string>
+    <string name="tentang_kami">Tentang Kami</string>
+    <string name="keluar">Keluar</string>
+    <!--CompImage-->
+    <string name="gagal_memuat_gambar">Gagal memuat gambar: %1$s</string>
+    <string name="lihat_semua">Lihat Semua</string>
+    <string name="tambahkan_foto">Tambahkan Foto</string>
+    <!---->
+    <string name="sejarah_next">Sejarah mengenai </string>
+    <!--DetailItem-->
+    <string name="kategori_sejarah">Sejarah</string>
+    <string name="kategori_penginapan">Penginapan</string>
+    <string name="kategori_event_agenda">Event &amp; Agenda</string>
+    <string name="kategori_restoran">Restorant</string>
+
+    <string name="title_balai_adat" translatable="false">Balai Adat Melayu</string>
+    <string name="title_benteng_kursi" translatable="false">Benteng Bukit Kursi</string>
+    <string name="title_gedung_tabib" translatable="false">Gedung Tabib</string>
+    <string name="title_makam_engku_putri" translatable="false">Makam Engku Putri</string>
+    <string name="title_makam_raja_ali_haji" translatable="false">Makam Raja Ali Haji</string>
+    <string name="title_masjid_raya" translatable="false">Masjid Raya Sultan Riau</string>
+    <string name="title_rumah_hakim" translatable="false">Rumah Hakim</string>
+
+    <string name="sejarah_balai_adat">Balai Adat Melayu di Pulau Penyengat merupakan pusat kegiatan adat dan budaya masyarakat Melayu. Bangunan ini menjadi tempat berkumpulnya para tetua adat, tokoh masyarakat, dan warga untuk menyelenggarakan berbagai upacara adat, musyawarah, serta kegiatan budaya lainnya. Arsitekturnya mencerminkan gaya khas Melayu dengan ukiran kayu yang sarat makna filosofis.
+
+Sebagai simbol pelestarian tradisi, Balai Adat Melayu memainkan peran penting dalam menjaga keberlangsungan nilai-nilai luhur yang diwariskan dari generasi ke generasi. Di sini, berbagai keputusan penting yang berkaitan dengan adat dan kehidupan masyarakat diambil melalui musyawarah mufakat.
+
+Selain fungsi sosial dan budaya, Balai Adat Melayu juga menjadi tempat pendidikan informal di mana generasi muda diajarkan tentang adat istiadat, sejarah, dan nilai-nilai moral masyarakat Melayu. Hal ini menjadikan balai ini sebagai lembaga pendidikan budaya yang vital.
+
+Keberadaan Balai Adat Melayu hingga kini menunjukkan komitmen masyarakat Pulau Penyengat dalam melestarikan warisan budaya mereka. Balai ini tidak hanya menjadi saksi bisu sejarah, tetapi juga terus hidup sebagai bagian dari kehidupan sehari-hari masyarakat.</string>
+
+    <string name="sejarah_benteng_kursi">Meriam Bukit Kursi adalah peninggalan bersejarah dari masa Kesultanan Riau-Lingga yang terletak di atas bukit di Pulau Penyengat. Meriam ini dulunya digunakan sebagai alat pertahanan utama melawan serangan dari penjajah dan bajak laut yang sering mengincar wilayah perairan Kesultanan.
+
+Posisi meriam yang strategis menghadap ke laut menunjukkan pentingnya lokasi ini dalam sistem pertahanan kerajaan. Selain fungsinya sebagai senjata, meriam ini juga menjadi simbol perlawanan dan keberanian rakyat Melayu dalam mempertahankan tanah air mereka.
+
+Hingga saat ini, Meriam Bukit Kursi menjadi saksi bisu perjuangan dan sering dikunjungi oleh wisatawan yang ingin melihat langsung jejak sejarah perlawanan lokal. Lokasinya yang berada di atas bukit juga menawarkan panorama laut lepas yang indah.
+
+Keberadaan meriam ini mengingatkan generasi muda akan pentingnya semangat juang dan patriotisme dalam mempertahankan kedaulatan dan kehormatan bangsa.</string>
+
+    <string name="sejarah_gedung_tabib">Gedung Tabib merupakan salah satu fasilitas penting pada masa Kesultanan Riau-Lingga yang digunakan sebagai tempat pelayanan kesehatan tradisional. Gedung ini menjadi tempat tinggal sekaligus praktik para tabib kerajaan yang ahli dalam pengobatan tradisional Melayu, termasuk ramuan herbal, pijat, dan terapi alami lainnya.
+
+Dibangun dengan gaya arsitektur khas Melayu yang menggabungkan unsur Timur Tengah, gedung ini menjadi bukti bahwa sistem kesehatan masyarakat sudah terorganisasi bahkan sebelum era modernisasi. Tabib-tabib yang bertugas di gedung ini biasanya merupakan orang pilihan dengan pengetahuan luas dalam ilmu pengobatan warisan leluhur.
+
+Kini, Gedung Tabib menjadi bagian penting dari pelestarian sejarah dan kebudayaan, menunjukkan bahwa kesehatan masyarakat telah menjadi perhatian utama sejak zaman dahulu. Bangunannya yang masih terawat menjadi saksi bisu perkembangan ilmu pengobatan tradisional di Pulau Penyengat.
+
+Kunjungan ke Gedung Tabib memberikan wawasan tentang bagaimana masyarakat Melayu mengintegrasikan ilmu pengobatan tradisional dalam kehidupan sehari-hari mereka, serta menghargai peran tabib dalam menjaga kesehatan masyarakat.</string>
+
+    <string name="sejarah_makam_engku_putri">Makam Engku Putri adalah tempat peristirahatan terakhir dari Engku Putri Raja Hamidah, istri dari Sultan Mahmud Syah III, yang dikenal luas sebagai sosok wanita yang bijaksana, berwibawa, dan sangat berperan dalam perkembangan agama dan kebudayaan Melayu. Beliau dikenal karena perannya dalam pembangunan Masjid Raya Sultan Riau yang megah, serta menjadi tokoh penting dalam pelestarian nilai-nilai Islam dan adat istiadat.
+
+Makamnya terletak di kompleks pemakaman bangsawan dan dikelilingi oleh bangunan pelindung yang dihiasi ornamen khas Melayu. Makam ini sering diziarahi oleh masyarakat setempat maupun wisatawan yang ingin mengenal lebih dekat sosok perempuan hebat dalam sejarah Kesultanan Riau-Lingga.
+
+Engku Putri menjadi simbol kekuatan perempuan dalam sejarah Melayu dan dikenang atas jasa-jasanya yang abadi. Keberadaan makam ini mengingatkan kita akan peran penting perempuan dalam sejarah dan budaya Melayu.
+
+Ziarah ke Makam Engku Putri memberikan kesempatan untuk merenungkan kontribusi beliau dalam membentuk identitas budaya dan spiritual masyarakat Melayu di Pulau Penyengat.</string>
+
+    <string name="sejarah_makam_raja_ali_haji">Raja Ali Haji adalah salah satu tokoh intelektual paling berpengaruh dalam sejarah budaya Melayu. Beliau merupakan pengarang dari karya sastra terkenal “Gurindam Dua Belas”, serta tokoh yang pertama kali menyusun sistematika bahasa Melayu baku yang kemudian menjadi fondasi Bahasa Indonesia modern.
+
+Makamnya berada di Pulau Penyengat, tempat beliau banyak menghabiskan waktu untuk menulis dan mengajar. Raja Ali Haji dikenal karena dedikasinya dalam memperjuangkan identitas Melayu melalui karya tulis dan pendidikan. Ia juga menjadi penasehat kerajaan dalam urusan sastra dan kebijakan.
+
+Kompleks makam Raja Ali Haji kini menjadi situs cagar budaya yang sangat dihormati dan sering dikunjungi oleh para peneliti, pelajar, dan wisatawan. Keberadaan makam ini menjadi simbol kekayaan intelektual dan warisan literasi yang luar biasa bagi bangsa Indonesia.
+
+Mengunjungi makam ini memberikan penghormatan kepada seorang tokoh yang telah memberikan kontribusi besar dalam pengembangan bahasa dan sastra Melayu, serta memperkuat identitas budaya bangsa.</string>
+
+    <string name="sejarah_masjid_raya">Masjid Raya Sultan Riau merupakan masjid bersejarah yang dibangun pada tahun 1803 oleh Sultan Mahmud Syah III bersama masyarakat Pulau Penyengat. Keunikan masjid ini terletak pada bahan bangunannya yang menggunakan campuran putih telur sebagai bahan perekat, mencerminkan teknik konstruksi tradisional yang inovatif pada masanya.
+
+Masjid ini tidak hanya menjadi tempat ibadah, tetapi juga pusat pendidikan dan dakwah Islam. Masjid dengan warna dominan kuning ini menjadi ikon spiritual Pulau Penyengat dan simbol kejayaan Kesultanan Riau-Lingga dalam menyebarkan agama Islam. Di masjid ini pula dahulu diajarkan ilmu agama, sastra, dan filsafat oleh para ulama terkemuka.
+
+Selain itu, masjid ini memiliki arsitektur yang unik dengan 13 kubah dan 4 menara yang melambangkan jumlah rakaat shalat dalam sehari semalam. Di dalam masjid juga terdapat Al-Qur’an tulisan tangan yang menjadi bukti kepedulian terhadap ilmu pengetahuan dan pendidikan.
+
+Masjid Raya Sultan Riau kini menjadi situs cagar budaya yang dilestarikan oleh pemerintah dan masyarakat setempat, serta menjadi destinasi wisata religi yang menarik bagi pengunjung dari berbagai daerah.</string>
+
+    <string name="sejarah_rumah_hakim">Rumah Hakim adalah kediaman resmi pejabat pengadilan kerajaan pada masa Kesultanan Riau-Lingga yang memiliki peran penting dalam menjalankan hukum adat Melayu. Rumah ini tidak hanya berfungsi sebagai tempat tinggal, tetapi juga sebagai ruang sidang untuk menyelesaikan berbagai perkara adat.
+
+Arsitekturnya mencerminkan kemegahan rumah bangsawan Melayu dengan struktur rumah panggung dan ukiran kayu yang penuh filosofi. Rumah ini menjadi simbol bahwa sistem hukum dan keadilan telah berlaku dengan tertib pada masa itu, dengan hakim sebagai tokoh sentral yang dihormati dalam masyarakat.
+
+Keberadaan Rumah Hakim menunjukkan bahwa peradaban Melayu sangat menghargai keadilan dan telah menerapkan sistem hukum yang rapi dan manusiawi jauh sebelum pengaruh kolonial datang. Rumah ini juga menjadi tempat pendidikan hukum adat bagi generasi muda.
+
+Mengunjungi Rumah Hakim memberikan pemahaman tentang bagaimana masyarakat Melayu mengelola sistem peradilan dan menegakkan hukum berdasarkan nilai-nilai adat dan keadilan.</string>
+    <!--PopUpSucsses-->
+    <string name="popup_success_title">Success</string>
+    <string name="popup_failed_title">Failed</string>
+    <string name="popup_success_default_keterangan">Operasi berhasil diselesaikan.</string>
+    <string name="popup_failed_default_keterangan">Terjadi kesalahan saat memproses data.</string>
+    <!--PreviewScreen-->
+    <string name="preview_title">Preview Gambar</string>
+    <string name="back_button_description">Kembali</string>
+    <string name="uploading_message">Sedang menganalisis gambar...</string>
+    <string name="upload_failed_message">Gagal menganalisis gambar. Silakan coba lagi.</string>
+    <!---->
+    <!---->
 </resources>

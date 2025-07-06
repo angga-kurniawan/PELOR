@@ -2,22 +2,20 @@ package com.example.pelor.PartGelis
 
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -26,10 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.Service.DriverWithUser
 import com.example.pelor.Service.ProfileRepository
 import com.example.pelor.Service.ProfileRepository.fetchDriver
-import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun SecGelis(navController: NavController?) {
@@ -37,10 +35,12 @@ fun SecGelis(navController: NavController?) {
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(true) }
     val context = LocalContext.current
-    val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+    val uidFlow = remember { UserPreferences(context).uid }
+    val currentUserId by uidFlow.collectAsState(initial = null)
 
     LaunchedEffect(Unit) {
         fetchDriver(
+            currentUserId = currentUserId,
             onSuccess = {
                 driverList.clear()
                 driverList.addAll(it)
@@ -54,8 +54,11 @@ fun SecGelis(navController: NavController?) {
     }
 
     if (isLoading) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(5) {
+                ShimmerGelisItem()
+                HorizontalDivider()
+            }
         }
     } else if (errorMessage != null) {
         Text(
@@ -68,11 +71,11 @@ fun SecGelis(navController: NavController?) {
             items(driverList) { item ->
                 CardGelis(
                     onClick = {
-                        Log.d("CURRENT_USER_ID", currentUserId)
+                        Log.d("CURRENT_USER_ID", currentUserId!!)
                         Log.d("DRIVER_UID", "Driver UID: ${item.user.uid}")
-                        if (currentUserId.isNotEmpty() && item.user.uid.isNotEmpty()) {
+                        if (currentUserId!!.isNotEmpty() && item.user.uid.isNotEmpty()) {
                             ProfileRepository.createOrGetChat(
-                                currentUserId = currentUserId,
+                                currentUserId = currentUserId!!,
                                 driverUserId = item.user.uid,
                                 onSuccess = { chatId ->
                                     navController?.navigate("chatPerson/$chatId")
@@ -102,4 +105,3 @@ fun SecGelis(navController: NavController?) {
 private fun SecGelisPrev() {
     SecGelis(rememberNavController())
 }
-

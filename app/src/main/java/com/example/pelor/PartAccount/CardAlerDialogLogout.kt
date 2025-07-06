@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,12 +35,14 @@ fun alertDialogExit(
     onClickNo: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Box(
         modifier = modifier
             .wrapContentHeight()
             .wrapContentWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .background(colorScheme.background)
             .border(
                 width = 1.dp,
                 shape = RoundedCornerShape(10.dp),
@@ -46,60 +50,56 @@ fun alertDialogExit(
             )
             .padding(20.dp),
         content = {
-            Column(
-                content = {
-                    Row(
-                        content = {
-                            Text(
-                                text = "Kamu Yakin Mau ",
-                                fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                                fontSize = 17.sp
-                            )
-                            Text(
-                                text = "LogOut ",
-                                fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                                fontSize = 17.sp,
-                                color = Color.Red
-                            )
-                            Text(
-                                text = "?",
-                                fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                                fontSize = 17.sp
-                            )
-                        }
+            Column {
+                Row {
+                    Text(
+                        text = stringResource(R.string.exit_dialog_question_part1),
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                        fontSize = 17.sp,
+                        color = colorScheme.onSecondary
                     )
-                    Spacer(modifier = Modifier.padding(5.dp))
-                    Row(
-                        modifier = Modifier.width(210.dp),
-                        horizontalArrangement = Arrangement.End,
-                        content = {
-                            TextButton(
-                                content = {
-                                    Text(
-                                        text = "Ya",
-                                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                                        color = Color(0xFF368BF4)
-                                    )
-                                },
-                                onClick = { onClickYes() }
-                            )
-                            Button(
-                                onClick = { onClickNo() },
-                                content = {
-                                    Text(
-                                        text = "Tidak",
-                                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
-                                    )
-                                },
-                                shape = RoundedCornerShape(5.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF368BF4)
-                                )
-                            )
-                        }
+                    Text(
+                        text = stringResource(R.string.exit_dialog_question_logout),
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                        fontSize = 17.sp,
+                        color = Color.Red
+                    )
+                    Text(
+                        text = "?",
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                        fontSize = 17.sp,
+                        color = colorScheme.background
                     )
                 }
-            )
+                Spacer(modifier = Modifier.padding(5.dp))
+                Row(
+                    modifier = Modifier.width(210.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(
+                        onClick = { onClickYes() }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.yes),
+                            fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                            color = Color(0xFF368BF4)
+                        )
+                    }
+                    Button(
+                        onClick = { onClickNo() },
+                        shape = RoundedCornerShape(5.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF368BF4)
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.no),
+                            fontFamily = FontFamily(Font(R.font.poppinsreguler)),
+                            color = Color.White
+                        )
+                    }
+                }
+            }
         }
     )
 }

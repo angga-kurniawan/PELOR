@@ -89,8 +89,7 @@ fun TopAppBarPersonChat(
                     Spacer(modifier = Modifier.padding(7.dp))
                     SecNameAndCode(
                         userName = userName,
-                        code = code,
-                        textColor = Color(0xFF323232)
+                        code = code
                     )
                 }
             )

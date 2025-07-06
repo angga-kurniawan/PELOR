@@ -25,7 +25,7 @@ android {
         val properties = Properties()
         properties.load(rootProject.file("local.properties").inputStream())
 
-        val apiUrl = properties.getProperty("API_URL")?:""
+        val apiUrl = properties.getProperty("API_URL") ?: ""
         buildConfigField("String", "API_URL", "\"$apiUrl\"")
     }
 
@@ -65,48 +65,54 @@ android {
 }
 
 dependencies {
+    // mace pace holder
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.34.0")
+    // animasi loading shimer simering brendid
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.0.3")
+    // data store
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
     // CameraX
     implementation("androidx.camera:camera-camera2:1.3.0")
     implementation("androidx.camera:camera-lifecycle:1.3.0")
     implementation("androidx.camera:camera-view:1.3.0")
     implementation("androidx.camera:camera-extensions:1.3.0")
 
-// Tab row / bar
+    // Tab row / bar
     implementation("com.google.accompanist:accompanist-pager:0.34.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.34.0")
 
-// ViewModel
+    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
 
-// Retrofit
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-// Firebase
+    // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
 
-// Coil for image loading
+    // Coil buat image loading
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-// Animation navigation
+    // Animation navigation
     implementation("com.google.accompanist:accompanist-navigation-animation:0.34.0")
 
-// Navigation
+    // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.2")
 
-// Constraint Layout
+    // Constraint Layout
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-beta01")
 
-// Map (OSM)
+    // Map (OSMDROID)
     implementation("org.osmdroid:osmdroid-android:6.1.16")
 
-// Faker
+    // Faker
     implementation("io.github.serpro69:kotlin-faker:1.14.0")
 
     implementation(libs.androidx.core.ktx)

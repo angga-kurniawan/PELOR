@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,17 +34,17 @@ fun SecSettings(
     Column(modifier = Modifier.fillMaxWidth()) {
         HorizontalDivider(color = Color(0xFFDFDFDF))
         Text(
-            text = "Pengaturan",
+            text = stringResource(R.string.pengaturan),
             color = Color(0xFF5C5C5C),
             modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)
         )
 
-        CardSettings(title = "Bahasa", sub = "indonesia", onClick = {onClickBahasa()})
-        CardSettings(title = "Tema", onClick = {onClickTema()})
-        CardSettings(title = "Ubah Password", onClick = {onClickUbahPassword()})
-        CardSettings(title = "Tentang Kami", onClick = {onClickTentangKami()})
+        CardSettings(title = stringResource(R.string.bahasa), sub = "indonesia", onClick = {onClickBahasa()})
+        CardSettings(title = stringResource(R.string.tema), onClick = {onClickTema()})
+        CardSettings(title = stringResource(R.string.ubah_password), onClick = {onClickUbahPassword()})
+        CardSettings(title = stringResource(R.string.tentang_kami), onClick = {onClickTentangKami()})
         CardSettings(
-            title = "Keluar",
+            title = stringResource(R.string.keluar),
             icon = {
                 Icon(
                     painter = painterResource(R.drawable.exiticon),
@@ -65,25 +67,32 @@ fun CardSettings(
     icon: (@Composable () -> Unit)? = null,
     onClick: () -> Unit
 ) {
+    val colorScheme = MaterialTheme.colorScheme
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(40.dp)
-            .clickable {
-                onClick()
-            }
+            .clickable { onClick() }
             .padding(horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        content = {
-            Text(text = title, color = Color(0xFF5C5C5C), fontSize = 13.sp)
-            sub?.let { sub ->
-                Text(text = sub, color = Color(0xFFB4B4B4), fontSize = 10.sp)
-            }
-            icon?.invoke()
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = title,
+            color = colorScheme.onBackground,
+            fontSize = 13.sp
+        )
+        sub?.let {
+            Text(
+                text = it,
+                color = colorScheme.onSurface.copy(alpha = 0.7f), // abu-abu yang adaptif
+                fontSize = 10.sp
+            )
         }
-    )
-    HorizontalDivider(color = Color(0xFFDFDFDF))
+        icon?.invoke()
+    }
+
+    HorizontalDivider(color = colorScheme.onSurface.copy(alpha = 0.1f)) // divider tidak terlalu terang
 }
 
 @Preview(showBackground = true)

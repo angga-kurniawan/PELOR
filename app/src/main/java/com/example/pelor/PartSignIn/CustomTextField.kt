@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -40,77 +41,86 @@ fun CustomTextField(
     placeholder: String = "",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     trailingIcon: @Composable (() -> Unit)? = null,
-    isError : Boolean,
+    isError: Boolean,
     onValueChange: (String) -> Unit
 ) {
-//    var inputLogin by remember { mutableStateOf(value) }
+    val colors = MaterialTheme.colorScheme
+    val borderColor = if (isError) colors.error else Color(0xFF368BF4)
+
     Box(
-        contentAlignment = Alignment.CenterStart,
-        content = {
-            TextField(
-                modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = Color(0xFF368BF4),
-                        shape = RoundedCornerShape(5.dp)
-                    )
-                    .fillMaxWidth(),
-                isError = isError,
-                value = value,
-                onValueChange = {onValueChange(it)},
-                shape = RoundedCornerShape(5.dp),
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.White,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                ),
-                placeholder = {
-                    Text(
-                        text = placeholder,
-                        color = Color.Gray
-                    )
-                },
-                visualTransformation = visualTransformation,
-                trailingIcon = trailingIcon,
-                singleLine = true
-            )
-            CompCustomTextField(
-                title = title,
-                modifier = Modifier.offset(
-                    x = 10.dp,
-                    y = (-25).dp
+        contentAlignment = Alignment.CenterStart
+    ) {
+        TextField(
+            modifier = Modifier
+                .border(
+                    width = 1.dp,
+                    color = borderColor,
+                    shape = RoundedCornerShape(5.dp)
                 )
-            )
-        }
-    )
+                .fillMaxWidth(),
+            isError = isError,
+            value = value,
+            onValueChange = { onValueChange(it) },
+            shape = RoundedCornerShape(5.dp),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface
+            ),
+            placeholder = {
+                Text(
+                    text = placeholder
+                )
+            },
+            visualTransformation = visualTransformation,
+            trailingIcon = trailingIcon,
+            singleLine = true
+        )
+
+        CompCustomTextField(
+            title = title,
+            modifier = Modifier.offset(x = 10.dp, y = (-25).dp),
+            backgroundColor = colors.background,
+            textColor = borderColor
+        )
+    }
 }
 
 @Composable
-fun CompCustomTextField(title: String, modifier: Modifier = Modifier) {
+fun CompCustomTextField(
+    title: String,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color,
+    textColor: Color
+) {
     Text(
         modifier = modifier
             .background(
-                color = Color.White,
+                color = backgroundColor,
                 shape = RoundedCornerShape(5.dp)
             )
             .border(
                 width = 1.dp,
-                color = Color(0xFF368BF4),
+                color = textColor,
                 shape = RoundedCornerShape(5.dp)
             )
-            .padding(
-                start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp
-            ),
+            .padding(horizontal = 10.dp, vertical = 5.dp),
         text = title,
-        color = Color(0xFF368BF4)
+        color = textColor,
+        style = MaterialTheme.typography.bodySmall
     )
-
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun CompCustomTextFieldPrev() {
-    CompCustomTextField(title = "email")
+//    CompCustomTextField(title = "email")
 }
 
 @Preview(showBackground = false)

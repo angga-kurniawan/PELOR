@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pelor.R
-import com.example.pelor.gemifikasi.daftarKegiatan
+import com.example.pelor.gemifikasi.getDaftarKegiatan
 
 @Composable
 fun SecMission(
@@ -20,9 +20,10 @@ fun SecMission(
     onClick: (String, String) -> Unit
 ) {
     var expandedItems = remember { mutableStateMapOf<Int, Boolean>() }
+    val kegiatan = getDaftarKegiatan()
 
     Column {
-        daftarKegiatan.forEachIndexed { index, kegiatan ->
+        kegiatan.forEachIndexed { index, kegiatan ->
             val isExpanded = expandedItems[index] ?: true
 
             CardPrimaryMission(
@@ -36,7 +37,7 @@ fun SecMission(
             AnimatedVisibility(visible = isExpanded) {
                 Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                     kegiatan.aktivitas.forEach { aktifitas ->
-                        val isSelesai = aktifitas.key in misiSelesaiList
+                        val isSelesai = misiSelesaiList.any { it.equals(aktifitas.key, ignoreCase = true) }
                         Log.e("penentu misi","${aktifitas.key} $misiSelesaiList")
                         CardSubMission(
                             subTitle = aktifitas.key,
