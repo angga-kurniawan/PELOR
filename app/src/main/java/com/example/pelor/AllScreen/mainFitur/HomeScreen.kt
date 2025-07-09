@@ -66,8 +66,10 @@ fun HomeScreen(navController: NavController? = null) {
 
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success && uri != null) {
-            viewModel.uploadImage(context, uri!!)
-            navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}")
+//            viewModel.uploadImage(context, uri!!)
+            navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}"){
+                launchSingleTop = true
+            }
         }
     }
 

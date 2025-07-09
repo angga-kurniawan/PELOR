@@ -12,11 +12,11 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="SplashScreen">
-        <option name="selectionMode" value="DIALOG" />
-        <DropdownSelection timestamp="2025-07-06T11:22:02.131137Z">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-07-09T03:12:10.756384Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=dc89bccd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dealatifah/.android/avd/Medium_Phone_Edited_API_28.avd" />
             </handle>
           </Target>
         </DropdownSelection>

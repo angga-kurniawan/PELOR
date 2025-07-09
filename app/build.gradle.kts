@@ -66,7 +66,8 @@ android {
 
 dependencies {
     // mace pace holder
-    implementation("com.google.accompanist:accompanist-placeholder-material:0.34.0")
+//    implementation("com.google.accompanist:accompanist-placeholder-material:0.34.0")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.28.0")
     // animasi loading shimer simering brendid
     implementation("com.valentinilk.shimmer:compose-shimmer:1.0.3")
     // data store
