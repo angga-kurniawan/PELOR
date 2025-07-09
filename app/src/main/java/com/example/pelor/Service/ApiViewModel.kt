@@ -32,6 +32,17 @@ class ApiViewModel : ViewModel() {
     var showLevelUpDialog by mutableStateOf(false)
         private set
 
+    var hasUploaded by mutableStateOf(false)
+        private set
+
+    fun setUploaded() {
+        hasUploaded = true
+    }
+
+    fun resetUploadFlag() {
+        hasUploaded = false
+    }
+
     fun dismissLevelUpDialog() {
         showLevelUpDialog = false
     }
@@ -54,20 +65,19 @@ class ApiViewModel : ViewModel() {
 
             val targetLower = when (expectedLower) {
                 "berkunjung ke masjid sultan riau" -> "masjid raya sultan riau"
-                "berkunjung ke istana kantor" -> "istana kantor"
                 "berkunjung ke makam raja ali haji" -> "makam raja ali haji"
-                "berkunjung ke balai adat" -> "balai adat"
+                "berkunjung ke balai adat melayu" -> "balai adat melayu"
                 else -> expectedLower
             }
 
             uploadConfidence = confidence
-            uploadLabel = if (confidence >= 80.0) labelRaw else null
+            uploadLabel = if (confidence >= 60.0) labelRaw else null
 
             Log.d("API RESULT", "Label: $labelRaw | Confidence: $confidence")
             Log.d("API TARGET", "Expected: $expectedLabel | MatchTarget: $targetLower | ResultAPI: $resultLower")
 
-            if (confidence < 80.0 || !resultLower.contains(targetLower)) {
-                uploadResult = labelRaw.ifEmpty { "Upload failed" }
+            if (confidence < 60.0 || !resultLower.contains(targetLower)) {
+                uploadResult = "❌ Misi gagal: tidak cocok atau confidence rendah"
                 Log.d("XP", "❌ Misi gagal: tidak cocok atau confidence rendah")
                 delay(5000)
                 onResultReady(false)
@@ -90,28 +100,28 @@ class ApiViewModel : ViewModel() {
                 ))
             }.addOnSuccessListener {
                 ProfileRepository.addXpToUser(
-                    amount = 5000,
-                    onSuccess = {
+                    amount = 7500,
+                    onSuccess = { isLevelUp ->
                         Log.d("XP", "✅ XP Misi +7500 dan misi ditambahkan ke Firestore")
                         viewModelScope.launch {
-                            uploadResult = labelRaw
-                            delay(7500)
-                            showLevelUpDialog = true
+                            uploadResult = result?.threshold_check
+                            delay(5000)
+                            if (isLevelUp) {
+                                showLevelUpDialog = true
+                            }
                             onResultReady(true)
                         }
                     },
                     onError = {
                         Log.e("XP", "❌ Gagal update XP: $it")
                         viewModelScope.launch {
-                            uploadResult = labelRaw
-                            delay(5000)
                             onResultReady(false)
                         }
                     }
                 )
             }.addOnFailureListener {
                 viewModelScope.launch {
-                    uploadResult = labelRaw
+                    uploadResult = result?.threshold_check
                     Log.e("XP", "❌ Gagal update misi: ${it.message}")
                     delay(5000)
                     onResultReady(false)
@@ -133,11 +143,11 @@ class ApiViewModel : ViewModel() {
             val confidence = result?.confidence ?: 0.0
 
             uploadConfidence = confidence
-            uploadLabel = if (confidence >= 80.0) result?.label else null
+            uploadLabel = if (confidence >= 60.0) result?.label else null
 
             Log.e("API RESULT", "Confidence: $confidence")
 
-            if (confidence >= 80.0) {
+            if (confidence >= 60.0) {
                 ProfileRepository.addXpToUser(
                     amount = 2500,
                     onSuccess = { isLevelUp ->

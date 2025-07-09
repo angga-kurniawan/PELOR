@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -108,19 +109,20 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
 
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success && uri != null) {
-            viewModel.uploadImage(context, uri!!)
-            navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}&misi=${Uri.encode(titlemisi.value)}")
+            navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}&misi=${Uri.encode(titlemisi.value)}"){
+                launchSingleTop = true
+            }
         }
     }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background, // Gunakan background sesuai tema
+        containerColor = MaterialTheme.colorScheme.background,
         content = { padingValues ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padingValues)
-                    .background(MaterialTheme.colorScheme.background), // Background Box
+                    .background(MaterialTheme.colorScheme.background),
             ) {
                 LazyColumn {
                     item {
@@ -156,7 +158,6 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                     }
                 }
 
-                // Dialog Bahasa
                 if (showDialogBahasa) {
                     AnimatedVisibility(
                         visible = showDialogBahasa,
@@ -212,6 +213,7 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
+                                .padding(30.dp)
                                 .clickable { showDialogMisiDetail = false }
                         ) {
                             PopUpKeteranganMisi(
@@ -252,7 +254,6 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                     }
                 }
 
-                // Edit Profile
                 if (showEdit) {
                     AnimatedVisibility(
                         visible = showEdit,

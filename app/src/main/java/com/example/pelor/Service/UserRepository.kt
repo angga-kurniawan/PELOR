@@ -354,27 +354,30 @@ object ProfileRepository {
         onError: (String) -> Unit = {}
     ) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
         val userRef = db.collection("users").document(uid)
+
         db.runTransaction { transaction ->
             val snapshot = transaction.get(userRef)
-            val currentXp = snapshot.getLong("xp") ?: 0
-            val currentLevel = snapshot.getLong("level") ?: 1
+            val currentXp = snapshot.getLong("xp") ?: 0L
+            val currentLevel = snapshot.getLong("level") ?: 1L
 
-            val totalXp = currentXp + amount
-            val calculatedLevel = (totalXp / 10000).toInt()
-            val sisaXp = (totalXp % 10000).toInt()
-            val newLevel = currentLevel.toInt() + calculatedLevel
+            val newTotalXp = currentXp + amount
+            val levelIncrement = newTotalXp / 10000
+            val sisaXp = newTotalXp % 10000
+            val newLevel = currentLevel + levelIncrement
 
-            val isLevelUp = calculatedLevel > 0
+            val isLevelUp = levelIncrement > 0
+
+            Log.d("XP_DEBUG", "XP: $currentXp + $amount = $newTotalXp, Naik Level: $levelIncrement, Sisa: $sisaXp, NewLevel: $newLevel")
 
             transaction.update(userRef, mapOf(
                 "xp" to sisaXp,
                 "level" to newLevel
             ))
 
-            isLevelUp // return value
+            isLevelUp
         }.addOnSuccessListener { isLevelUp ->
+            Log.d("XP_RESULT", "✅ Update Berhasil. LevelUp? $isLevelUp")
             onSuccess(isLevelUp)
         }.addOnFailureListener {
             onError(it.message ?: "Gagal update XP & level")

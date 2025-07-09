@@ -16,7 +16,7 @@
     <string name="toast_upload_failed">❌ Gagal mengupload</string>
     <string name="toast_logout_success">Logout Succses</string>
     <!--ScreenACCount-->
-    <string name="popup_mission_reward_info">Kamu akan mendapatkan 2500 XP jika berhasil!</string>
+    <string name="popup_mission_reward_info">Kamu akan mendapatkan 7500 XP jika berhasil!</string>
     <!--CardAccount-->
     <string name="adventure_rank">Adventure Rank</string>
     <!--CardAlerDialog-->
@@ -62,7 +62,6 @@
     <string name="gagal_memuat_gambar">Gagal memuat gambar: %1$s</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="tambahkan_foto">Tambahkan Foto</string>
-    <!---->
     <string name="sejarah_next">Sejarah mengenai </string>
     <!--DetailItem-->
     <string name="kategori_sejarah">Sejarah</string>

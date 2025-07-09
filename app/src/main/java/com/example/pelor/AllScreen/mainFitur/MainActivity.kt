@@ -147,7 +147,7 @@ class MainActivity : ComponentActivity() {
                                 viewModel = viewModel,
                                 navController = navController,
                                 expectedLabel = misi,
-                                onMissionResult = { success ->
+                                onResult = { success ->
                                     Toast.makeText(
                                         context,
                                         if (success)
