@@ -1,5 +1,9 @@
 package com.example.pelor.PartDetail
 
+import android.net.Uri
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,27 +40,32 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.pelor.R
+import com.example.pelor.Service.ApiViewModel
 import com.example.pelor.Service.ImageLocation
 import com.example.pelor.Service.ProfileRepository
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -64,10 +73,42 @@ import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
-fun CompImage(navController: NavController?, title: String) {
+fun CompImage(
+    navController: NavController?,
+    title: String,
+    isLoadingImageUpload: MutableState<Boolean>,
+    loadingText: MutableState<String>,
+    acceptedUris: SnapshotStateList<Uri>,
+    rejectedUris: SnapshotStateList<Uri>,
+) {
     val imageList = remember { mutableStateListOf<ImageLocation>() }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    val viewModel: ApiViewModel = viewModel()
+    val context = LocalContext.current
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents()
+    ) { uris ->
+        viewModel.uploadDetectedImagesToFirestore(
+            context = context,
+            uris = uris,
+            locationName = when (title.lowercase()) {
+                "malay traditional hall" -> "balai adat melayu"
+                "kursi hill fort" -> "benteng bukit kursi"
+                "physicians building" -> "gedung tabib"
+                "engku putris tomb" -> "makam engku putri"
+                "raja ali hajis tomb" -> "makam raja ali haji"
+                "sultan riau grand mosque" -> "masjid raya sultan riau"
+                "judges house" -> "rumah hakim"
+                else -> title.lowercase()
+            },
+            loadingState = isLoadingImageUpload,
+            loadingText = loadingText,
+            acceptedUris = acceptedUris,
+            rejectedUris = rejectedUris,
+            onUploadDone = {}
+        )
+    }
 
     LaunchedEffect(Unit) {
         ProfileRepository.fetchImages(
@@ -174,7 +215,9 @@ fun CompImage(navController: NavController?, title: String) {
                             .width(150.dp)
                             .weight(1f)
                             .background(Color(0xFF8AB6ED))
-                            .clickable { },
+                            .clickable {
+                                launcher.launch("image/*")
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -361,5 +404,5 @@ fun LihatSemuaGambarScreen(navController: NavController?, lokasi: String) {
 @Preview
 @Composable
 private fun CompImagePrev() {
-    CompImage(rememberNavController(), "")
+//    CompImage(rememberNavController(), "")
 }

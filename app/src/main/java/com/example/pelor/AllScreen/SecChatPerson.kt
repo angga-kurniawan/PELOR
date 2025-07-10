@@ -29,13 +29,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.PartPersonChat.CardDialogCharPerson
 import com.example.pelor.PartPersonChat.TextFieldInputChatPerson
 import com.example.pelor.PartPersonChat.TopAppBarPersonChat
 import com.example.pelor.Service.Message
 import com.example.pelor.Service.ProfileRepository
 import com.example.pelor.Service.User
+import com.example.pelor.Service.UserPreferences
 import com.example.pelor.Service.formatChatTimestamp
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth

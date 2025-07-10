@@ -68,9 +68,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.pelor.AllScreen.mainFitur.account.LogicAccount
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.R
 import com.example.pelor.Service.ProfileRepository
+import com.example.pelor.Service.UserPreferences
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState

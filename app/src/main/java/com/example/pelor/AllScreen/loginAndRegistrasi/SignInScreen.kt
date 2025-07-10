@@ -33,6 +33,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -103,13 +105,12 @@ fun SignInScreen(onBack: () -> Unit, navController: NavController) {
             contentDescription = null,
             contentScale = ContentScale.FillBounds
         )
-        val isDark = isSystemInDarkTheme()
         Box(contentAlignment = Alignment.TopCenter) {
             Image(
                 modifier = Modifier
                     .width(336.dp)
                     .height(372.dp)
-                    .alpha(if (isDark) 0.2f else 1f),
+                    .alpha(if (isSystemInDarkTheme()) 0.2f else 1f),
                 painter = painterResource(R.drawable.bgloginandregister),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds
@@ -241,9 +242,9 @@ fun SignInScreen(onBack: () -> Unit, navController: NavController) {
                             navController.navigate("registrasi")
                         },
                         text = "Sign Up",
-                        color = colorScheme.secondary,
+                        color = colorScheme.primary,
                         fontSize = 10.sp,
-                        style = typography.bodySmall
+                        fontFamily = FontFamily(Font(R.font.poppinsreguler))
                     )
                 }
             }
@@ -253,7 +254,7 @@ fun SignInScreen(onBack: () -> Unit, navController: NavController) {
             modifier = Modifier
                 .padding(bottom = 20.dp)
                 .align(Alignment.BottomCenter),
-            text = "DewiPupe ©2025",
+            text = "Nuswapada ©2025",
             fontSize = 8.sp,
             color = colorScheme.onBackground,
             style = typography.labelSmall

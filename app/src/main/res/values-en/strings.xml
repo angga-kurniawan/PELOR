@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pelor</string>
-    <string name="title_activity_login_sukses">ActivityLoginSukses</string>
+    <string name="title_activity_login_sukses">ActivityLoginSuccess</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="indonesia">Indonesian</string>
     <string name="inggris">English</string>
-    <string name="china">China</string>
     <string name="dialog_title_level_up">🎉 Congratulations!</string>
-    <string name="dialog_message_level_up">You`ve leveled up! Keep up the spirit in completing missions 💪</string>
-    <string name="dialog_button_ok">Ok</string>
+    <string name="dialog_message_level_up">Youve leveled up! Keep up the spirit in completing your missions 💪</string>
+    <string name="dialog_button_ok">Okay</string>
     <string name="toast_upload_success">✅ XP successfully added</string>
-    <string name="toast_upload_failed">❌ Upload failed</string>
+    <string name="toast_upload_failed">❌ Failed to upload</string>
     <string name="toast_logout_success">Logout Success</string>
-    <string name="popup_mission_reward_info">You will get 2500 XP if you succeed!</string>
+    <string name="popup_mission_reward_info">You will get 7500 XP if you succeed!</string>
     <string name="adventure_rank">Adventure Rank</string>
-    <string name="exit_dialog_question_part1">Are you sure you want to </string>
-    <string name="exit_dialog_question_logout">Log Out </string>
+    <string name="exit_dialog_question_part1">Are You Sure You Want To </string>
+    <string name="exit_dialog_question_logout">LogOut </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="tab_profile">Profile</string>
@@ -30,91 +29,112 @@
     <string name="toast_success_save">Successfully saved</string>
     <string name="kegiatan_judul_lagenda">LEGEND OF PENYENGAT ISLAND</string>
     <string name="kegiatan_judul_penjelajah">MEDIA EXPLORER</string>
+
     <string name="aktivitas_masjid">Visit Sultan Riau Mosque</string>
-    <string name="aktivitas_balai">Visit Malay Customary Hall</string>
-    <string name="aktivitas_makam">Visit Raja Ali Haji`s Tomb</string>
+    <string name="aktivitas_balai">Visit Malay Traditional Hall</string>
+    <string name="aktivitas_makam">Visit Raja Ali Hajis Tomb</string>
+
     <string name="deskripsi_masjid">You must go to Sultan Riau Mosque and take a photo there to get XP</string>
-    <string name="deskripsi_balai">You must go to Malay Customary Hall and take a photo there to get XP</string>
-    <string name="deskripsi_makam">You must go to Raja Ali Haji`s Tomb and take a photo there to get XP</string>
+    <string name="deskripsi_balai">You must go to Malay Traditional Hall and take a photo there to get XP</string>
+    <string name="deskripsi_makam">You must go to Raja Ali Hajis Tomb and take a photo there to get XP</string>
+
     <string name="aktivitas_foto_sejarah">Upload 4 photos of historical sites from Penyengat Island</string>
     <string name="deskripsi_foto_sejarah">Upload 4 photos of historical sites from Penyengat Island</string>
     <string name="pengaturan">Settings</string>
     <string name="bahasa">Language</string>
-    <string name="bahasa_sub">Indonesian</string>
+    <string name="bahasa_sub">English</string>
     <string name="tema">Theme</string>
     <string name="ubah_password">Change Password</string>
     <string name="tentang_kami">About Us</string>
-    <string name="keluar">Log Out</string>
+    <string name="keluar">Logout</string>
     <string name="gagal_memuat_gambar">Failed to load image: %1$s</string>
-    <string name="lihat_semua">See All</string>
+    <string name="lihat_semua">View All</string>
     <string name="tambahkan_foto">Add Photo</string>
     <string name="sejarah_next">History about </string>
     <string name="kategori_sejarah">History</string>
-    <string name="kategori_penginapan">Accommodation</string>
-    <string name="kategori_event_agenda">Events &amp; Agenda</string>
-    <string name="kategori_restoran">Restaurant</string>
-    <string name="title_balai_adat" translatable="false">Balai Adat Melayu</string>
-    <string name="title_benteng_kursi" translatable="false">Benteng Bukit Kursi</string>
-    <string name="title_gedung_tabib" translatable="false">Gedung Tabib</string>
-    <string name="title_makam_engku_putri" translatable="false">Makam Engku Putri</string>
-    <string name="title_makam_raja_ali_haji" translatable="false">Makam Raja Ali Haji</string>
-    <string name="title_masjid_raya" translatable="false">Masjid Raya Sultan Riau</string>
-    <string name="title_rumah_hakim" translatable="false">Rumah Hakim</string>
-    <string name="sejarah_balai_adat">The Malay Customary Hall on Penyengat Island is a center for traditional customs and cultural activities of the Malay community. This building serves as a gathering place for elders, community leaders, and residents to hold various traditional ceremonies, deliberations, and other cultural activities. Its architecture reflects the typical Malay style with wood carvings rich in philosophical meaning.
+    <string name="kategori_event_agenda">Event &amp; Agenda</string>
+    <string name="kategori_kuliner_melayu">Malay Culinary</string>
 
-As a symbol of tradition preservation, the Malay Customary Hall plays an important role in maintaining the continuity of noble values inherited from generation to generation. Here, various important decisions related to customs and community life are made through consensus.
+    <string name="title_balai_adat" translatable="false">Malay Traditional Hall</string>
+    <string name="title_benteng_kursi" translatable="false">Kursi Hill Fort</string>
+    <string name="title_gedung_tabib" translatable="false">Physicians Building</string>
+    <string name="title_makam_engku_putri" translatable="false">Engku Putris Tomb</string>
+    <string name="title_makam_raja_ali_haji" >Raja Ali Hajis Tomb</string>
+    <string name="title_masjid_raya" >Sultan Riau Grand Mosque</string>
+    <string name="title_rumah_hakim" >Judges House</string>
 
-In addition to its social and cultural functions, the Malay Customary Hall also serves as an informal education center where young generations are taught about Malay customs, history, and moral values. This makes the hall a vital cultural education institution.
+    <string name="sejarah_balai_adat">The Malay Traditional Hall on Penyengat Island is a center for Malay communitys customary and cultural activities. This building serves as a gathering place for elders, community leaders, and residents to hold various customary ceremonies, deliberations, and other cultural activities. Its architecture reflects a distinctive Malay style with intricately carved wood full of philosophical meaning.
 
-The existence of the Malay Customary Hall to this day shows the commitment of the Penyengat Island community to preserve their cultural heritage. This hall is not only a silent witness to history but also continues to live as part of the daily life of the community.</string>
-    <string name="sejarah_benteng_kursi">Meriam Bukit Kursi is a historical relic from the era of the Riau-Lingga Sultanate located on a hill on Penyengat Island. This cannon was once used as a primary defense tool against attacks from invaders and pirates who often targeted the Sultanate`s waters.
+As a symbol of tradition preservation, the Malay Traditional Hall plays an important role in maintaining the continuity of noble values inherited from generation to generation. Di sini, various important decisions related to customs and community life are made through consensus.
 
-The strategic position of the cannon facing the sea indicates the importance of this location in the kingdom`s defense system. In addition to its function as a weapon, this cannon also symbolizes the resistance and bravery of the Malay people in defending their homeland.
+In addition to its social and cultural functions, the Malay Traditional Hall also serves as an informal educational institution where younger generations are taught about Malay customs, history, and moral values. This makes the hall a vital cultural education institution.
 
-To this day, Meriam Bukit Kursi remains a silent witness to the struggle and is often visited by tourists who wish to see firsthand the historical traces of local resistance. Its location on the hill also offers a beautiful panorama of the open sea.
+The existence of the Malay Traditional Hall to this day demonstrates the commitment of the Penyengat Island community to preserve their cultural heritage. This hall is not only a silent witness to history but also continues to live as part of the communitys daily life.</string>
 
-The presence of this cannon reminds the younger generation of the importance of the spirit of struggle and patriotism in defending the sovereignty and honor of the nation.</string>
-    <string name="sejarah_gedung_tabib">The Physician`s Building was an important facility during the Riau-Lingga Sultanate era, used as a traditional healthcare service center. This building served as both a residence and a practice place for royal physicians skilled in traditional Malay medicine, including herbal remedies, massage, and other natural therapies.
+    <string name="sejarah_benteng_kursi">Kursi Hill Cannon is a historical relic from the Riau-Lingga Sultanate era located on a hill on Penyengat Island. This cannon was formerly used as the primary defense tool against attacks from colonizers and pirates who often targeted the Sultanates waters.
 
-Built in a distinctive Malay architectural style combining Middle Eastern elements, this building is evidence that the public health system was organized even before the era of modernization. The physicians working in this building were usually chosen individuals with extensive knowledge of ancestral medical science.
+The strategic position of the cannon facing the sea shows the importance of this location in the kingdoms defense system. In addition to its function as a weapon, this cannon also symbolizes the resistance and bravery of the Malay people in defending their homeland.
 
-Today, the Physician`s Building is an important part of historical and cultural preservation, showing that public health has been a primary concern since ancient times. Its well-preserved building remains a silent witness to the development of traditional medicine on Penyengat Island.
+To this day, the Kursi Hill Cannon stands as a silent witness to struggle and is often visited by tourists who want to see firsthand the traces of local resistance history. Its location on top of a hill also offers beautiful panoramic views of the open sea.
 
-A visit to the Physician`s Building provides insight into how the Malay community integrated traditional medical knowledge into their daily lives and appreciated the role of physicians in maintaining public health.</string>
-    <string name="sejarah_makam_engku_putri">Engku Putri`s Tomb is the final resting place of Engku Putri Raja Hamidah, wife of Sultan Mahmud Syah III, who was widely known as a wise and authoritative woman who played a significant role in the development of Malay religion and culture. She was known for her role in the construction of the magnificent Sultan Riau Grand Mosque and was an important figure in the preservation of Islamic values and customs.
+The existence of this cannon reminds the younger generation of the importance of the spirit of struggle and patriotism in defending the sovereignty and honor of the nation.</string>
 
-Her tomb is located in the noble cemetery complex and is surrounded by protective structures adorned with distinctive Malay ornaments. This tomb is often visited by local communities and tourists who wish to learn more about this great woman in the history of the Riau-Lingga Sultanate.
+    <string name="sejarah_gedung_tabib">The Physicians Building was one of the important facilities during the Riau-Lingga Sultanate era, used as a traditional healthcare service center. This building served as both a residence and practice space for royal physicians skilled in traditional Malay medicine, including herbal remedies, massage, and other natural therapies.
 
-Engku Putri symbolizes the strength of women in Malay history and is remembered for her everlasting services. The existence of this tomb reminds us of the important role of women in Malay history and culture.
+Built with a distinctive Malay architectural style combining Middle Eastern elements, this building proves that the public health system was organized even before the era of modernization. Physicians working in this building were usually chosen individuals with extensive knowledge of ancestral healing arts.
 
-A pilgrimage to Engku Putri`s Tomb provides an opportunity to reflect on her contributions in shaping the cultural and spiritual identity of the Malay community on Penyengat Island.</string>
-    <string name="sejarah_makam_raja_ali_haji">Raja Ali Haji is one of the most influential intellectual figures in Malay cultural history. He was the author of the famous literary work "Gurindam Dua Belas", and the first figure to systematize standard Malay language, which later became the foundation of modern Indonesian.
+Today, the Physicians Building is an important part of historical and cultural preservation, showing that public health has been a primary concern since ancient times. Its well-preserved structure stands as a silent witness to the development of traditional medicine on Penyengat Island.
 
-His tomb is located on Penyengat Island, where he spent much time writing and teaching. Raja Ali Haji was known for his dedication to upholding Malay identity through his writings and education. He also served as a royal advisor in literary and policy matters.
+A visit to the Physicians Building provides insight into how the Malay community integrated traditional medicine into their daily lives, and appreciates the role of physicians in maintaining public health.</string>
 
-The Raja Ali Haji tomb complex is now a highly respected cultural heritage site often visited by researchers, students, and tourists. The existence of this tomb symbolizes the extraordinary intellectual richness and literary heritage for the Indonesian nation.
+    <string name="sejarah_makam_engku_putri">Engku Putris Tomb is the final resting place of Engku Putri Raja Hamidah, wife of Sultan Mahmud Syah III, who is widely known as a wise, influential woman who played a significant role in the development of Malay religion and culture. She is known for her role in the construction of the magnificent Sultan Riau Grand Mosque, and as an important figure in the preservation of Islamic values and customs.
 
-Visiting this tomb pays homage to a figure who made significant contributions to the development of Malay language and literature, and strengthened the nation`s cultural identity.</string>
-    <string name="sejarah_masjid_raya">The Sultan Riau Grand Mosque is a historic mosque built in 1803 by Sultan Mahmud Syah III along with the community of Penyengat Island. The uniqueness of this mosque lies in its building material, which uses a mixture of egg whites as an adhesive, reflecting an innovative traditional construction technique of its time.
+Her tomb is located in the royal cemetery complex and is surrounded by protective structures adorned with distinctive Malay ornaments. This tomb is frequently visited by local communities and tourists who wish to learn more about this great woman in the history of the Riau-Lingga Sultanate.
 
-This mosque is not only a place of worship but also a center for Islamic education and dakwah. This yellow-dominated mosque has become the spiritual icon of Penyengat Island and a symbol of the glory of the Riau-Lingga Sultanate in spreading Islam. In this mosque, religious knowledge, literature, and philosophy were taught by prominent scholars.
+Engku Putri symbolizes the strength of women in Malay history and is remembered for her enduring services. The existence of this tomb reminds us of the important role of women in Malay history and culture.
 
-Furthermore, this mosque has a unique architecture with 13 domes and 4 minarets symbolizing the number of prayer cycles (rakaat) in a day and night. Inside the mosque, there is also a handwritten Al-Qur`an, which serves as proof of concern for knowledge and education.
+A pilgrimage to Engku Putris Tomb provides an opportunity to reflect on her contributions in shaping the cultural and spiritual identity of the Malay community on Penyengat Island.</string>
 
-The Sultan Riau Grand Mosque is now a cultural heritage site preserved by the government and local community and is an attractive religious tourist destination for visitors from various regions.</string>
-    <string name="sejarah_rumah_hakim">The Judge`s House was the official residence of royal court officials during the Riau-Lingga Sultanate era, playing an important role in upholding traditional Malay customary law. This house not only served as a residence but also as a courtroom for settling various customary cases.
+    <string name="sejarah_makam_raja_ali_haji">Raja Ali Haji is one of the most influential intellectual figures in Malay cultural history. He was the author of the famous literary work “Gurindam Dua Belas”, and the first figure to systematize the standard Malay language which later became the foundation of modern Indonesian.
 
-Its architecture reflects the grandeur of a Malay noble`s house with its stilt house structure and wood carvings full of philosophy. This house symbolizes that a system of law and justice had been orderly implemented at that time, with the judge as a respected central figure in the community.
+His tomb is on Penyengat Island, where he spent much of his time writing and teaching. Raja Ali Haji was known for his dedication to advocating Malay identity through his writings and education. He also served as a royal advisor in literary affairs and policies.
 
-The existence of the Judge`s House shows that Malay civilization highly valued justice and had implemented a neat and humane legal system long before colonial influence arrived. This house also served as a traditional law education center for the younger generation.
+The Raja Ali Haji tomb complex is now a highly respected cultural heritage site, frequently visited by researchers, students, and tourists. The existence of this tomb symbolizes the extraordinary intellectual wealth and literary heritage for the Indonesian nation.
 
-Visiting the Judge`s House provides an understanding of how the Malay community managed its judicial system and enforced laws based on customary values and justice.</string>
+Visiting this tomb pays homage to a figure who made significant contributions to the development of Malay language and literature, and strengthened the nations cultural identity.</string>
+
+    <string name="sejarah_masjid_raya">Sultan Riau Grand Mosque is a historical mosque built in 1803 by Sultan Mahmud Syah III and the community of Penyengat Island. The uniqueness of this mosque lies in its building material, which uses a mixture of egg whites as a binder, reflecting innovative traditional construction techniques of its time.
+
+This mosque is not only a place of worship but also a center for Islamic education and propagation. This predominantly yellow mosque has become the spiritual icon of Penyengat Island and a symbol of the Riau-Lingga Sultanates glory in spreading Islam. Here, religious knowledge, literature, and philosophy were taught by prominent scholars.
+
+In addition, this mosque has unique architecture with 13 domes and 4 minarets symbolizing the number of prayer cycles in a day and night. Inside the mosque, there is also a handwritten Quran which is evidence of concern for science and education.
+
+Sultan Riau Grand Mosque is now a cultural heritage site preserved by the government and local community, and an attractive religious tourist destination for visitors from various regions.</string>
+
+    <string name="sejarah_rumah_hakim">The Judges House was the official residence of the royal court official during the Riau-Lingga Sultanate era, who played an important role in administering Malay customary law. This house not only functioned as a residence but also as a courtroom for resolving various customary cases.
+
+Its architecture reflects the grandeur of a Malay nobles house with a stilt house structure and wood carvings full of philosophy. This house symbolizes that a system of law and justice was orderly in effect at that time, with the judge as a central figure respected in society.
+
+The existence of the Judges House shows that Malay civilization greatly valued justice and had implemented a neat and humane legal system long before colonial influence arrived. This house also served as a place for customary law education for the younger generation.
+
+Visiting the Judges House provides an understanding of how the Malay community managed the judicial system and upheld law based on customary values and justice.</string>
     <string name="popup_success_title">Success</string>
     <string name="popup_failed_title">Failed</string>
     <string name="popup_success_default_keterangan">Operation completed successfully.</string>
     <string name="popup_failed_default_keterangan">An error occurred while processing data.</string>
     <string name="preview_title">Image Preview</string>
-    <string name="back_button_description">Back button</string>
-    <string name="uploading_message">Analyzing image…</string>
+    <string name="back_button_description">Back</string>
+    <string name="uploading_message">Analyzing image...</string>
     <string name="upload_failed_message">Failed to analyze image. Please try again.</string>
+    <string name="cat_sejarah">History</string>
+    <string name="cat_event_agenda">Event &amp; Agenda</string>
+    <string name="cat_kuliner">Culinary</string>
+    <string name="masjid_raya_sultan_riau">Sultan Riau Grand Mosque</string>
+    <string name="gedung_tabib">Physicians Building</string>
+    <string name="makam_raja_ali_haji">Raja Ali Hajis Tomb</string>
+    <string name="balai_adat_melayu">Malay Traditional Hall</string>
+    <string name="rumah_hakim">Judges House</string>
+    <string name="benteng_bukit_kursi">Kursi Hill Fort</string>
+    <string name="makam_engku_putri">Engku Putris Tomb</string>
+    <string name="pasar_tradisional">Traditional Market</string>
 </resources>

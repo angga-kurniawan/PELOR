@@ -3,7 +3,6 @@ package com.example.pelor.Service
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.AuthPreferences
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore

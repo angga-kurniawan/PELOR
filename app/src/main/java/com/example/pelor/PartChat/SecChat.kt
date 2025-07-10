@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.Service.ChatPreview
 import com.example.pelor.Service.ProfileRepository.fetchChatParticipants
+import com.example.pelor.Service.UserPreferences
 import com.example.pelor.Service.formatChatTimestamp
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder

@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.example.pelor.Service.KategoriData
-import com.example.pelor.gemifikasi.kategoriMarkers
+import com.example.pelor.gemifikasi.KategoriType
+import com.example.pelor.gemifikasi.getKategoriMarkers
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
@@ -23,10 +25,13 @@ import org.osmdroid.views.overlay.Polygon
 
 @Composable
 fun PulauPenyengatMap(
-    selectedCategory: String,
+    selectedCategory: KategoriType,
     searchQuery: String,
     onNavigateToDetail: (String) -> Unit
 ) {
+    val kategoriMarkers = getKategoriMarkers()
+    val kategori = kategoriMarkers[selectedCategory]
+
     AndroidView(
         factory = { context ->
             Configuration.getInstance().load(
@@ -73,15 +78,15 @@ fun PulauPenyengatMap(
         update = { mapView ->
             mapView.overlays.removeAll { it is Marker || it is Polygon }
 
-            val kategori = kategoriMarkers[selectedCategory]
-
             when (kategori) {
                 is KategoriData.MarkerList -> {
                     val allPoints = mutableListOf<GeoPoint>()
 
                     kategori.markers.forEach { item ->
+                        val title = mapView.context.getString(item.titleResId)
+
                         if (searchQuery.isNotBlank() &&
-                            !item.title.contains(searchQuery, ignoreCase = true)
+                            !title.contains(searchQuery, ignoreCase = true)
                         ) return@forEach
 
                         val point = GeoPoint(item.latitude, item.longitude)
@@ -89,24 +94,24 @@ fun PulauPenyengatMap(
 
                         val drawable = ContextCompat.getDrawable(mapView.context, item.iconResId)
                         if (drawable == null) {
-                            Log.e("DrawableError", "Drawable null: ${item.title}, resId: ${item.iconResId}")
+                            Log.e("DrawableError", "Drawable null: $title, resId: ${item.iconResId}")
                             return@forEach
                         }
 
                         val marker = Marker(mapView).apply {
                             position = point
-                            title = item.title
+                            this.title = title
                             setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                             icon = drawable
                             setOnMarkerClickListener { _, _ ->
-                                onNavigateToDetail(item.title)
+                                onNavigateToDetail(title)
                                 true
                             }
                         }
+
                         mapView.overlays.add(marker)
                     }
 
-                    // Zoom ke lokasi spesifik kalau hanya satu hasil
                     when (allPoints.size) {
                         1 -> {
                             mapView.controller.setZoom(19.0)
@@ -136,16 +141,16 @@ fun PulauPenyengatMap(
                     }
 
                     kategori.data.marker?.let { markerItem ->
-                        if (searchQuery.isBlank() ||
-                            markerItem.title.contains(searchQuery, ignoreCase = true)
-                        ) {
+                        val title = mapView.context.getString(markerItem.titleResId)
+
+                        if (searchQuery.isBlank() || title.contains(searchQuery, ignoreCase = true)) {
                             val markerPoint = GeoPoint(markerItem.latitude, markerItem.longitude)
                             val drawable = ContextCompat.getDrawable(mapView.context, markerItem.iconResId)
 
                             if (drawable != null) {
                                 val marker = Marker(mapView).apply {
                                     position = markerPoint
-                                    title = markerItem.title
+                                    this.title = title
                                     setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                                     icon = drawable
                                     setOnMarkerClickListener { _, _ ->

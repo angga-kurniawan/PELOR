@@ -4,10 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Timestamp
@@ -16,9 +12,12 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -334,7 +333,18 @@ object ProfileRepository {
         onSuccess: (List<ImageLocation>) -> Unit,
         onError: (String) -> Unit
     ) {
-        db.collection(collection)
+        val mappedCollection = when (collection) {
+            "malay traditional hall" -> "balai adat melayu"
+            "kursi hill fort" -> "benteng bukit kursi"
+            "physicians building" -> "gedung tabib"
+            "engku putris tomb" -> "makam engku putri"
+            "raja ali hajis tomb" -> "makam raja ali haji"
+            "sultan riau grand mosque" -> "masjid raya sultan riau"
+            "judges house" -> "rumah hakim"
+            else -> collection.lowercase()
+        }
+        Log.e("map pade collection",mappedCollection)
+        db.collection(mappedCollection)
             .get()
             .addOnSuccessListener { snapshot ->
                 val list = snapshot.documents.mapNotNull { doc ->
@@ -383,10 +393,12 @@ object ProfileRepository {
             onError(it.message ?: "Gagal update XP & level")
         }
     }
+
 }
 
 
 class UploadRepository {
+
     suspend fun uploadImage(context: Context, uri: Uri): UploadResponse? {
         return try {
             val inputStream = context.contentResolver.openInputStream(uri) ?: return null
@@ -402,6 +414,33 @@ class UploadRepository {
         } catch (e: Exception) {
             e.printStackTrace()
             null
+        }
+    }
+
+    suspend fun uploadToCloudinary(context: Context, uri: Uri): String? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val inputStream = context.contentResolver.openInputStream(uri) ?: return@withContext null
+                val file = File.createTempFile("upload", ".jpg", context.cacheDir)
+                file.outputStream().use { inputStream.copyTo(it) }
+
+                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+                val multipart = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+                val uploadPreset = "unsigned_present" // Ganti ini dengan nama upload preset kamu di Cloudinary
+                val uploadPresetBody = uploadPreset.toRequestBody("text/plain".toMediaTypeOrNull())
+
+                val response = CloudinaryApiClient.apiService.uploadToCloudinary(multipart, uploadPresetBody)
+                if (response.isSuccessful) {
+                    response.body()?.secure_url
+                } else {
+                    Log.e("CLOUDINARY_ERROR", "Gagal: ${response.errorBody()?.string()}")
+                    null
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 }

@@ -1,15 +1,9 @@
 package com.example.pelor.gemifikasi
 
-import androidx.annotation.DrawableRes
-
-//data class Catagory(
-//    val katagory: List<String>,
-//)
+import com.example.pelor.R
 
 val catagory = listOf(
-    "Sejarah",
-    "Penginapan",
-    "Event & Agenda",
-    "Kuliner",
-    "Restorant"
+    R.string.kategori_sejarah,
+    R.string.kategori_event_agenda,
+    R.string.kategori_kuliner_melayu
 )

@@ -1,7 +1,10 @@
 package com.example.pelor.Service
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import com.google.firebase.Timestamp
+import com.google.gson.annotations.SerializedName
 import org.osmdroid.util.GeoPoint
 
 data class UploadResponse(
@@ -51,10 +54,10 @@ data class ImageLocation(
 )
 
 data class MarkerItem(
-    val title: String,
+    @StringRes val titleResId: Int,
     val latitude: Double,
     val longitude: Double,
-    val iconResId: Int
+    @DrawableRes val iconResId: Int
 )
 
 data class ZoneData(
@@ -72,3 +75,7 @@ sealed class KategoriData {
     data class MarkerList(val markers: List<MarkerItem>) : KategoriData()
     data class EventAgenda(val data: EventAgendaData) : KategoriData()
 }
+
+data class CloudinaryResponse(
+    @SerializedName("secure_url") val secure_url: String
+)

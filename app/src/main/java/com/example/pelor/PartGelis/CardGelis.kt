@@ -122,19 +122,19 @@ fun CardGelis(
 
                     Spacer(modifier = Modifier.weight(1f))
 
-                    Icon(
-                        painter = painterResource(id = R.drawable.morved),
-                        contentDescription = null,
-                        tint = colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(16.dp)
-                    )
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.morved),
+//                        contentDescription = null,
+//                        tint = colorScheme.onSurfaceVariant,
+//                        modifier = Modifier.size(16.dp)
+//                    )
                 }
 
-                Text(
-                    text = "Pengalaman: $pengalaman",
-                    fontSize = 12.sp,
-                    color = colorScheme.onSurfaceVariant
-                )
+//                Text(
+//                    text = "Pengalaman: $pengalaman",
+//                    fontSize = 12.sp,
+//                    color = colorScheme.onSurfaceVariant
+//                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
