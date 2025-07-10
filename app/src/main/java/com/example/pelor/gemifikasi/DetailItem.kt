@@ -49,19 +49,6 @@ fun getKategoriDetails(context: Context): List<KategoriDetail> {
             )
         ),
         KategoriDetail(
-            category = context.getString(R.string.kategori_penginapan),
-            items = listOf(
-                SejarahItem(
-                    title = context.getString(R.string.title_gedung_tabib),
-                    sejarah = context.getString(R.string.sejarah_gedung_tabib)
-                ),
-                SejarahItem(
-                    title = context.getString(R.string.title_rumah_hakim),
-                    sejarah = context.getString(R.string.sejarah_rumah_hakim)
-                )
-            )
-        ),
-        KategoriDetail(
             category = context.getString(R.string.kategori_event_agenda),
             items = listOf(
                 SejarahItem(
@@ -71,15 +58,6 @@ fun getKategoriDetails(context: Context): List<KategoriDetail> {
                 SejarahItem(
                     title = context.getString(R.string.title_makam_engku_putri),
                     sejarah = context.getString(R.string.sejarah_makam_engku_putri)
-                )
-            )
-        ),
-        KategoriDetail(
-            category = context.getString(R.string.kategori_restoran),
-            items = listOf(
-                SejarahItem(
-                    title = context.getString(R.string.title_balai_adat),
-                    sejarah = context.getString(R.string.sejarah_balai_adat)
                 )
             )
         )

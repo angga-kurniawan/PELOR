@@ -1,5 +1,6 @@
 package com.example.pelor.PartDetail
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,10 +39,15 @@ import com.example.pelor.gemifikasi.getKategoriDetails
 fun SecDetail(
     title: String,
     onClose: () -> Unit,
-    navController: NavController?
+    navController: NavController?,
+    isLoadingImageUpload: MutableState<Boolean>,
+    loadingText: MutableState<String>,
+    acceptedUris: SnapshotStateList<Uri>,
+    rejectedUris: SnapshotStateList<Uri>,
 ) {
     val context = LocalContext.current
     val kategoriDetails = remember { getKategoriDetails(context) }
+
     val filteredItemsWithCategory = kategoriDetails
         .flatMap { kategori ->
             kategori.items.map { item ->
@@ -51,8 +59,7 @@ fun SecDetail(
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 15.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -84,7 +91,6 @@ fun SecDetail(
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 15.dp)
     ) {
         items(filteredItemsWithCategory) { (sejarahItem, category) ->
             Text(
@@ -95,7 +101,14 @@ fun SecDetail(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            CompImage(navController = navController, title = title)
+            CompImage(
+                navController = navController,
+                title = title,
+                isLoadingImageUpload = isLoadingImageUpload,
+                loadingText = loadingText,
+                acceptedUris = acceptedUris,
+                rejectedUris = rejectedUris,
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
@@ -143,11 +156,11 @@ fun SecDetail(
 @Preview(showBackground = true)
 @Composable
 private fun SecDetailPrev() {
-    SecDetail(
-        title = "Balai Adat Melayu",
-        onClose = {
-
-        },
-        navController = rememberNavController()
-    )
+//    SecDetail(
+//        title = "Balai Adat Melayu",
+//        onClose = {
+//
+//        },
+//        navController = rememberNavController()
+//    )
 }

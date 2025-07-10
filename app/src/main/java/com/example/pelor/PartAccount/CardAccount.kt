@@ -100,7 +100,7 @@ fun CardAccount(
                                     Image(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .height(50.dp),
+                                            .height(70.dp),
                                         painter = painterResource(R.drawable.bg_shadow_small),
                                         contentDescription = "",
                                         contentScale = ContentScale.FillBounds

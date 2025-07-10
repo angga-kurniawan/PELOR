@@ -269,7 +269,7 @@ fun SignUpScreen(navController: NavController) {
                             navController.popBackStack()
                         },
                         text = "Sign In",
-                        color = colorScheme.secondary,
+                        color = colorScheme.primary,
                         fontSize = 10.sp,
                         fontFamily = FontFamily(Font(R.font.poppinsreguler))
                     )
@@ -281,7 +281,7 @@ fun SignUpScreen(navController: NavController) {
             modifier = Modifier
                 .padding(bottom = 20.dp)
                 .align(Alignment.BottomCenter),
-            text = "DewiPupe ©2025",
+            text = "Nuswapada ©2025",
             fontSize = 8.sp,
             color = colorScheme.onBackground,
             fontFamily = FontFamily(Font(R.font.poppinsreguler))

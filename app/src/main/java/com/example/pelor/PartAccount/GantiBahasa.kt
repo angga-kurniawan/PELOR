@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +15,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,48 +44,62 @@ import java.util.Locale
 fun LanguagePickerDialog(
     modifier: Modifier = Modifier,
     selected: String,
-    onSelect: (String) -> Unit
+    onSelect: (String,String) -> Unit
 ) {
     val options = listOf(
         "id" to stringResource(R.string.indonesia),
-        "en" to stringResource(R.string.inggris),
-        "cn" to stringResource(R.string.china)
+        "en" to stringResource(R.string.inggris)
     )
 
     Box(
         modifier = modifier
-            .width(300.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
-            .border(1.dp, Color.LightGray)
-            .padding(16.dp)
+            .width(320.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
+            .padding(20.dp)
     ) {
         Column {
             Text(
                 text = stringResource(R.string.bahasa),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                modifier = Modifier.padding(bottom = 10.dp)
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 16.dp)
             )
             options.forEach { (code, label) ->
+                val isSelected = selected == code
+                val rowColor = if (isSelected)
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                else
+                    Color.Transparent
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onSelect(code) }
-                        .padding(vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(rowColor)
+                        .clickable { onSelect(code,label) }
+                        .padding(horizontal = 12.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    RadioButton(
-                        selected = selected == code,
-                        onClick = { onSelect(code) }
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = label)
+                    if (isSelected) {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }
     }
 }
+
 object LocaleHelper {
     fun setLocale(context: Context, language: String): Context {
         val locale = Locale(language)
@@ -92,6 +112,7 @@ object LocaleHelper {
         return context.createConfigurationContext(config)
     }
 }
+
 class LanguageViewModel(application: Application) : AndroidViewModel(application) {
     var selectedLanguage by mutableStateOf("id")
         private set

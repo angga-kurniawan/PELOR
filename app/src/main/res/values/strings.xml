@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pelor</string>
     <string name="title_activity_login_sukses">ActivityLoginSukses</string>
@@ -7,7 +8,6 @@
     <!--language-->
     <string name="indonesia">Indonesia</string>
     <string name="inggris">Inggris</string>
-    <string name="china">China</string>
     <!--MainActivity-->
     <string name="dialog_title_level_up">🎉 Selamat!</string>
     <string name="dialog_message_level_up">Kamu telah naik level! Terus semangat menyelesaikan misinya 💪</string>
@@ -65,17 +65,16 @@
     <string name="sejarah_next">Sejarah mengenai </string>
     <!--DetailItem-->
     <string name="kategori_sejarah">Sejarah</string>
-    <string name="kategori_penginapan">Penginapan</string>
     <string name="kategori_event_agenda">Event &amp; Agenda</string>
-    <string name="kategori_restoran">Restorant</string>
+    <string name="kategori_kuliner_melayu">Kuliner Melayu</string>
 
     <string name="title_balai_adat" translatable="false">Balai Adat Melayu</string>
     <string name="title_benteng_kursi" translatable="false">Benteng Bukit Kursi</string>
     <string name="title_gedung_tabib" translatable="false">Gedung Tabib</string>
     <string name="title_makam_engku_putri" translatable="false">Makam Engku Putri</string>
-    <string name="title_makam_raja_ali_haji" translatable="false">Makam Raja Ali Haji</string>
-    <string name="title_masjid_raya" translatable="false">Masjid Raya Sultan Riau</string>
-    <string name="title_rumah_hakim" translatable="false">Rumah Hakim</string>
+    <string name="title_makam_raja_ali_haji" >Makam Raja Ali Haji</string>
+    <string name="title_masjid_raya" >Masjid Raya Sultan Riau</string>
+    <string name="title_rumah_hakim" >Rumah Hakim</string>
 
     <string name="sejarah_balai_adat">Balai Adat Melayu di Pulau Penyengat merupakan pusat kegiatan adat dan budaya masyarakat Melayu. Bangunan ini menjadi tempat berkumpulnya para tetua adat, tokoh masyarakat, dan warga untuk menyelenggarakan berbagai upacara adat, musyawarah, serta kegiatan budaya lainnya. Arsitekturnya mencerminkan gaya khas Melayu dengan ukiran kayu yang sarat makna filosofis.
 
@@ -142,6 +141,17 @@ Mengunjungi Rumah Hakim memberikan pemahaman tentang bagaimana masyarakat Melayu
     <string name="back_button_description">Kembali</string>
     <string name="uploading_message">Sedang menganalisis gambar...</string>
     <string name="upload_failed_message">Gagal menganalisis gambar. Silakan coba lagi.</string>
-    <!---->
-    <!---->
+    <!--category-->
+    <string name="cat_sejarah">Sejarah</string>
+    <string name="cat_event_agenda">Event &amp; Agenda</string>
+    <string name="cat_kuliner">Kuliner</string>
+    <!--marker-->
+    <string name="masjid_raya_sultan_riau">Masjid Raya Sultan Riau</string>
+    <string name="gedung_tabib">Gedung Tabib</string>
+    <string name="makam_raja_ali_haji">Makam Raja Ali Haji</string>
+    <string name="balai_adat_melayu">Balai Adat Melayu</string>
+    <string name="rumah_hakim">Rumah Hakim</string>
+    <string name="benteng_bukit_kursi">Benteng Bukit Kursi</string>
+    <string name="makam_engku_putri">Makam Engku Putri</string>
+    <string name="pasar_tradisional">Pasar Tradisional</string>
 </resources>

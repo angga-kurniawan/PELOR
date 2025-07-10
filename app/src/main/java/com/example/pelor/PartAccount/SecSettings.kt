@@ -30,6 +30,7 @@ fun SecSettings(
     onClickUbahPassword : () -> Unit,
     onClickTentangKami : () -> Unit,
     onClickTema : () -> Unit,
+    bahasaYangDigunakan: String
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         HorizontalDivider(color = Color(0xFFDFDFDF))
@@ -39,10 +40,10 @@ fun SecSettings(
             modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)
         )
 
-        CardSettings(title = stringResource(R.string.bahasa), sub = "indonesia", onClick = {onClickBahasa()})
+        CardSettings(title = stringResource(R.string.bahasa), sub = bahasaYangDigunakan, onClick = {onClickBahasa()})
         CardSettings(title = stringResource(R.string.tema), onClick = {onClickTema()})
-        CardSettings(title = stringResource(R.string.ubah_password), onClick = {onClickUbahPassword()})
-        CardSettings(title = stringResource(R.string.tentang_kami), onClick = {onClickTentangKami()})
+//        CardSettings(title = stringResource(R.string.ubah_password), onClick = {onClickUbahPassword()})
+//        CardSettings(title = stringResource(R.string.tentang_kami), onClick = {onClickTentangKami()})
         CardSettings(
             title = stringResource(R.string.keluar),
             icon = {
@@ -85,18 +86,18 @@ fun CardSettings(
         sub?.let {
             Text(
                 text = it,
-                color = colorScheme.onSurface.copy(alpha = 0.7f), // abu-abu yang adaptif
+                color = colorScheme.onSurface.copy(alpha = 0.7f),
                 fontSize = 10.sp
             )
         }
         icon?.invoke()
     }
 
-    HorizontalDivider(color = colorScheme.onSurface.copy(alpha = 0.1f)) // divider tidak terlalu terang
+    HorizontalDivider(color = colorScheme.onSurface.copy(alpha = 0.1f))
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun SecSettingsPrev() {
-    SecSettings({},{},{},{},{})
+    SecSettings({},{},{},{},{},"")
 }

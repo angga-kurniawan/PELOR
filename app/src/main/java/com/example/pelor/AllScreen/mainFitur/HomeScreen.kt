@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,18 +36,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.pelor.AllScreen.mainFitur.account.LogicAccount.getUserData
-import com.example.pelor.AllScreen.mainFitur.account.UserPreferences
 import com.example.pelor.PartDetail.SecDetail
 import com.example.pelor.PartGelis.SecGelis
 import com.example.pelor.PartHome.ComponentCatagory
 import com.example.pelor.PartHome.CustomBottomSheetScaffold
+import com.example.pelor.PartHome.LocalScrollingEnabled
 import com.example.pelor.PartHome.PulauPenyengatMap
 import com.example.pelor.PartHome.TopAppBarCustom
+import com.example.pelor.PopUpScreen.LoadingUplodImageToFireStore
 import com.example.pelor.R
-import com.example.pelor.Service.ApiViewModel
+import com.example.pelor.Service.UserPreferences
+import com.example.pelor.gemifikasi.KategoriType
 import java.io.File
 
 @Composable
@@ -55,18 +57,21 @@ fun HomeScreen(navController: NavController? = null) {
     var selectedTitle by remember { mutableStateOf<String?>(null) }
     var expandSheet by remember { mutableStateOf<(() -> Unit)?>(null) }
     var collapseSheet by remember { mutableStateOf<(() -> Unit)?>(null) }
-    var selectedCategory by remember { mutableStateOf<String?>(null) }
+    var selectedCategory by remember { mutableStateOf<KategoriType?>(null) }
     val xp = remember { mutableIntStateOf(0) }
     val imgUrl = remember { mutableStateOf("") }
     val context = LocalContext.current
     var uri by remember { mutableStateOf<Uri?>(null) }
-    val viewModel: ApiViewModel = viewModel()
     val uidFlow = remember { UserPreferences(context).uid }
     val uid by uidFlow.collectAsState(initial = null)
-
+    val isLoadingImageUpload = remember { mutableStateOf(false) }
+    val loadingText = remember { mutableStateOf("Memuat...") }
+    val acceptedUris = remember { mutableStateListOf<Uri>() }
+    val rejectedUris = remember { mutableStateListOf<Uri>() }
+    val isUploadFinished = remember { mutableStateOf(false) }
+    var expandHalfSheet by remember { mutableStateOf<(() -> Unit)?>(null) }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success && uri != null) {
-//            viewModel.uploadImage(context, uri!!)
             navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}"){
                 launchSingleTop = true
             }
@@ -85,19 +90,7 @@ fun HomeScreen(navController: NavController? = null) {
     )
 
     CustomBottomSheetScaffold(
-        sheetContent = { isExpanded ->
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-            ) {
-                Divider(
-                    modifier = Modifier
-                        .width(30.dp)
-                        .align(Alignment.CenterHorizontally),
-                    thickness = 2.dp,
-                    color = MaterialTheme.colorScheme.outline
-                )
+        sheetContent = { isExpanded, isFullyExpanded ->
 
                 when {
                     selectedTitle != null -> {
@@ -107,7 +100,11 @@ fun HomeScreen(navController: NavController? = null) {
                                 selectedTitle = null
                                 collapseSheet?.invoke()
                             },
-                            navController = navController
+                            navController = navController,
+                            isLoadingImageUpload = isLoadingImageUpload,
+                            loadingText = loadingText,
+                            acceptedUris = acceptedUris,
+                            rejectedUris = rejectedUris,
                         )
                     }
 
@@ -132,11 +129,11 @@ fun HomeScreen(navController: NavController? = null) {
                         }
                     }
                 }
-            }
         },
-        onExpandRequest = { expandFn, collapseFn ->
-            expandSheet = expandFn
-            collapseSheet = collapseFn
+        onExpandRequest = { expandFull, collapse, expandHalf ->
+            expandSheet = expandFull
+            collapseSheet = collapse
+            expandHalfSheet = expandHalf
         },
         floatingActionButton = {
             Column {
@@ -191,9 +188,9 @@ fun HomeScreen(navController: NavController? = null) {
                 PulauPenyengatMap(
                     onNavigateToDetail = {
                         selectedTitle = it
-                        expandSheet?.invoke()
+                        expandHalfSheet?.invoke()
                     },
-                    selectedCategory = selectedCategory ?: "Sejarah",
+                    selectedCategory = selectedCategory ?: KategoriType.SEJARAH,
                     searchQuery = searchQuery
                 )
 
@@ -211,6 +208,22 @@ fun HomeScreen(navController: NavController? = null) {
             }
         }
     )
+
+    if (isLoadingImageUpload.value) {
+        val finished = acceptedUris.isNotEmpty() || rejectedUris.isNotEmpty()
+        LoadingUplodImageToFireStore(
+            loadingText = loadingText.value,
+            acceptedUris = acceptedUris,
+            rejectedUris = rejectedUris,
+            uploadFinished = finished,
+            onDismiss = {
+                isLoadingImageUpload.value = false
+                acceptedUris.clear()
+                rejectedUris.clear()
+                loadingText.value = "Memuat..."
+            }
+        )
+    }
 }
 
 @Preview(showBackground = true)

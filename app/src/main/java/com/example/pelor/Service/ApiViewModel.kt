@@ -3,17 +3,18 @@ package com.example.pelor.Service
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 class ApiViewModel : ViewModel() {
@@ -74,7 +75,10 @@ class ApiViewModel : ViewModel() {
             uploadLabel = if (confidence >= 60.0) labelRaw else null
 
             Log.d("API RESULT", "Label: $labelRaw | Confidence: $confidence")
-            Log.d("API TARGET", "Expected: $expectedLabel | MatchTarget: $targetLower | ResultAPI: $resultLower")
+            Log.d(
+                "API TARGET",
+                "Expected: $expectedLabel | MatchTarget: $targetLower | ResultAPI: $resultLower"
+            )
 
             if (confidence < 60.0 || !resultLower.contains(targetLower)) {
                 uploadResult = "❌ Misi gagal: tidak cocok atau confidence rendah"
@@ -90,14 +94,17 @@ class ApiViewModel : ViewModel() {
 
             FirebaseFirestore.getInstance().runTransaction { transaction ->
                 val snapshot = transaction.get(userRef)
-                val currentDone = (snapshot.get("mission done") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                val currentDone =
+                    (snapshot.get("mission done") as? List<*>)?.filterIsInstance<String>()
+                        ?: emptyList()
                 val updatedDone = currentDone.toMutableSet().apply {
                     add(expectedLabel)
                 }
-
-                transaction.update(userRef, mapOf(
-                    "mission done" to updatedDone.toList()
-                ))
+                transaction.update(
+                    userRef, mapOf(
+                        "mission done" to updatedDone.toList()
+                    )
+                )
             }.addOnSuccessListener {
                 ProfileRepository.addXpToUser(
                     amount = 7500,
@@ -171,6 +178,78 @@ class ApiViewModel : ViewModel() {
                 uploadResult = result?.threshold_check ?: "Upload failed"
                 onResultReady(false)
             }
+        }
+    }
+
+    fun uploadDetectedImagesToFirestore(
+        context: Context,
+        uris: List<Uri>,
+        locationName: String,
+        loadingState: MutableState<Boolean>,
+        loadingText: MutableState<String>,
+        acceptedUris: SnapshotStateList<Uri>,
+        rejectedUris: SnapshotStateList<Uri>,
+        onUploadDone: () -> Unit
+    ) {
+
+        viewModelScope.launch {
+            loadingState.value = true
+            loadingText.value = "🔍 Mengecek ${uris.size} gambar..."
+            uploadResult = loadingText.value
+
+            acceptedUris.clear()
+            rejectedUris.clear()
+
+            val expectedLower = locationName.lowercase().trim()
+            var success = 0
+            var fail = 0
+
+            for ((index, uri) in uris.withIndex()) {
+                loadingText.value = "📷 Mengecek gambar ${index + 1}..."
+                uploadResult = loadingText.value
+
+                val result = repo.uploadImage(context, uri)
+                val label = result?.label?.trim().orEmpty().lowercase()
+                val confidence = result?.confidence ?: 0.0
+
+                if (confidence >= 60.0 && label.contains(expectedLower)) {
+                    loadingText.value = "📤 Mengupload gambar ${index + 1} ke Cloudinary..."
+                    uploadResult = loadingText.value
+
+                    val url = repo.uploadToCloudinary(context, uri)
+
+                    if (url != null) {
+                        try {
+                            FirebaseFirestore.getInstance()
+                                .collection(expectedLower)
+                                .add(hashMapOf("imgUrl" to url))
+                                .await()
+                            acceptedUris.add(uri)
+                            success++
+                        } catch (e: Exception) {
+                            rejectedUris.add(uri)
+                            fail++
+                        }
+                    } else {
+                        rejectedUris.add(uri)
+                        fail++
+                    }
+                } else {
+                    rejectedUris.add(uri)
+                    fail++
+                }
+            }
+
+            val finalResult = when {
+                success == 0 -> "❌ Semua gambar tidak cocok atau gagal upload ($fail)"
+                fail == 0 -> "✅ Semua gambar cocok dan berhasil disimpan ($success)"
+                else -> "⚠️ $success gambar disimpan, $fail gagal atau tidak cocok"
+            }
+
+            loadingText.value = finalResult
+            uploadResult = finalResult
+
+            onUploadDone()
         }
     }
 }

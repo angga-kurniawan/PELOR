@@ -3,7 +3,6 @@ package com.example.pelor.PopUpScreen
 import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,18 +18,22 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,10 +51,11 @@ fun PopUpTheme(
         factory = ThemeViewModelFactory(context.applicationContext as Application)
     )
 
-    val surfaceColor = MaterialTheme.colorScheme.surface
+    val isDarkTheme by themeViewModel.isDarkMode.collectAsState(initial = true)
     val borderColor = MaterialTheme.colorScheme.outline
-    val iconBgColor = MaterialTheme.colorScheme.secondaryContainer
-    val iconColor = MaterialTheme.colorScheme.onSecondaryContainer
+    val surfaceColor = MaterialTheme.colorScheme.surface
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val onSurfaceColor = MaterialTheme.colorScheme.onSurface
 
     Column(
         modifier = modifier
@@ -64,64 +68,57 @@ fun PopUpTheme(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier
-                    .border(width = 1.dp, color = borderColor, shape = CircleShape)
-                    .clip(CircleShape)
-                    .size(60.dp)
-                    .background(MaterialTheme.colorScheme.onPrimary)
+            Text(
+                text = stringResource(id = R.string.tema),
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Medium),
+                color = onSurfaceColor
             )
             IconButton(
                 modifier = Modifier
                     .clip(CircleShape)
                     .size(30.dp),
-                onClick = { onClick() },
+                onClick = onClick,
                 colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = iconBgColor,
-                    contentColor = iconColor
+                    containerColor = primaryColor.copy(alpha = 0.1f),
+                    contentColor = primaryColor
                 )
             ) {
                 Icon(
-                    modifier = Modifier.size(20.dp),
-                    painter = painterResource(R.drawable.baseline_close_24),
-                    contentDescription = null
+                    painter = painterResource(id = R.drawable.baseline_close_24),
+                    contentDescription = "Close",
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
 
         Spacer(modifier = Modifier.height(10.dp))
         Divider(color = borderColor)
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Box(
-                modifier = Modifier
-                    .clickable { themeViewModel.setDarkMode(false) }
-                    .border(width = 1.dp, color = borderColor, shape = CircleShape)
-                    .clip(CircleShape)
-                    .size(60.dp)
-                    .background(Color.White)
+            ThemeOption(
+                isSelected = !isDarkTheme,
+                backgroundColor = Color.White,
+                onClick = { themeViewModel.setDarkMode(false) }
             )
-            Box(
-                modifier = Modifier
-                    .clickable { themeViewModel.setDarkMode(true) }
-                    .border(width = 1.dp, color = borderColor, shape = CircleShape)
-                    .clip(CircleShape)
-                    .size(60.dp)
-                    .background(Color.Black)
+
+            ThemeOption(
+                isSelected = isDarkTheme,
+                backgroundColor = Color.Black,
+                onClick = { themeViewModel.setDarkMode(true) }
             )
-            Box(
-                modifier = Modifier
-                    .clickable { }
-                    .border(width = 1.dp, color = borderColor, shape = CircleShape)
-                    .clip(CircleShape)
-                    .size(60.dp)
-                    .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.8f))
+
+            ThemeOption(
+                isSelected = false,
+                backgroundColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.4f),
+                onClick = null,
+                isComingSoon = true
             )
         }
     }

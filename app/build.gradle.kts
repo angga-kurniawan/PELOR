@@ -57,14 +57,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
+    // icon
+    implementation("androidx.compose.material:material-icons-extended")
     // mace pace holder
 //    implementation("com.google.accompanist:accompanist-placeholder-material:0.34.0")
     implementation("com.google.accompanist:accompanist-placeholder-material:0.28.0")

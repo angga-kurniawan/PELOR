@@ -1,7 +1,6 @@
 package com.example.pelor.AllScreen.mainFitur.account
 
 import android.app.Activity
-import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -27,17 +26,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.pelor.PartAccount.CardAccount
@@ -50,11 +46,9 @@ import com.example.pelor.PartAccount.alertDialogExit
 import com.example.pelor.PopUpScreen.PopUpKeteranganMisi
 import com.example.pelor.PopUpScreen.PopUpTheme
 import com.example.pelor.R
-import com.example.pelor.Service.ApiViewModel
-import com.google.firebase.auth.FirebaseAuth
+import com.example.pelor.Service.UserPreferences
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.io.File
 
 @Composable
@@ -66,13 +60,13 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
     val imgUrl = remember { mutableStateOf("") }
     val titlemisi = remember { mutableStateOf("") }
     val submisi = remember { mutableStateOf("") }
+    val idSubMisi = remember { mutableStateOf("") }
     var showDialogMisiDetail by remember { mutableStateOf(false) }
     var showDialogTema by remember { mutableStateOf(false) }
     var showDialogExit by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
     val context = LocalContext.current
     var uri by remember { mutableStateOf<Uri?>(null) }
-    val viewModel: ApiViewModel = viewModel()
     val misiSelesaiList = remember { mutableStateListOf<String>() }
     val misiSelesai by remember { derivedStateOf { misiSelesaiList.toList() } }
     val languageViewModel: LanguageViewModel = viewModel()
@@ -80,8 +74,12 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
     val uidFlow = remember { UserPreferences(context).uid }
     val uid by uidFlow.collectAsState(initial = null)
     val currentUserId = uid.orEmpty()
+    val userPreferences = remember { UserPreferences(context) }
+    val bahasaLabelFlow = remember { userPreferences.languageLabel }
+    val bahasaYangDigunakan by bahasaLabelFlow.collectAsState(initial = "Bahasa Indonesia")
+    val coroutineScope = rememberCoroutineScope()
 
-    if (!currentUserId.isNullOrEmpty()) {
+    if (currentUserId.isNotEmpty()) {
         DisposableEffect(currentUserId) {
             val listenerRegistration = FirebaseFirestore.getInstance()
                 .collection("users")
@@ -107,13 +105,20 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
         }
     }
 
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success && uri != null) {
-            navController?.navigate("preview?imageUri=${Uri.encode(uri.toString())}&misi=${Uri.encode(titlemisi.value)}"){
-                launchSingleTop = true
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success && uri != null) {
+                navController?.navigate(
+                    "preview?imageUri=${Uri.encode(uri.toString())}&misi=${
+                        Uri.encode(
+                            idSubMisi.value
+                        )
+                    }"
+                ) {
+                    launchSingleTop = true
+                }
             }
         }
-    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -140,9 +145,10 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                     item {
                         SecMission(
                             misiSelesaiList = misiSelesai,
-                            onClick = { title, sub ->
+                            onClick = { title, sub, id ->
                                 titlemisi.value = title
                                 submisi.value = sub
+                                idSubMisi.value = id
                                 showDialogMisiDetail = true
                             }
                         )
@@ -153,7 +159,8 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                             onClickBahasa = { showDialogBahasa = true },
                             onClickTema = { showDialogTema = true },
                             onClickUbahPassword = { },
-                            onClickTentangKami = { }
+                            onClickTentangKami = { },
+                            bahasaYangDigunakan = bahasaYangDigunakan
                         )
                     }
                 }
@@ -173,8 +180,11 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                             LanguagePickerDialog(
                                 modifier = Modifier.align(Alignment.Center),
                                 selected = languageViewModel.selectedLanguage,
-                                onSelect = { lang ->
+                                onSelect = { lang,label ->
                                     languageViewModel.setLanguage(lang)
+                                    coroutineScope.launch {
+                                        userPreferences.setLanguageLabel(label)
+                                    }
                                     showDialogBahasa = false
                                     (context as? Activity)?.recreate()
                                 }
@@ -222,8 +232,15 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
                                 misi = submisi.value,
                                 keteranganHadiah = context.getString(R.string.popup_mission_reward_info),
                                 onClick = {
-                                    val file = File(context.externalCacheDir, "photo_${System.currentTimeMillis()}.jpg")
-                                    val tempUri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                                    val file = File(
+                                        context.externalCacheDir,
+                                        "photo_${System.currentTimeMillis()}.jpg"
+                                    )
+                                    val tempUri = FileProvider.getUriForFile(
+                                        context,
+                                        "${context.packageName}.fileprovider",
+                                        file
+                                    )
                                     uri = tempUri
                                     launcher.launch(tempUri)
                                     showDialogMisiDetail = false
@@ -274,30 +291,6 @@ fun ScreenAccount(navController: NavController? = null, logOut: () -> Unit) {
             }
         }
     )
-}
-
-val Context.userDataStore by preferencesDataStore(name = "user_prefs")
-
-class UserPreferences(private val context: Context) {
-    companion object {
-        val UID_KEY = stringPreferencesKey("user_uid")
-    }
-
-    val uid: Flow<String?> = context.userDataStore.data.map { prefs ->
-        prefs[UID_KEY]
-    }
-
-    suspend fun saveUid(uid: String) {
-        context.userDataStore.edit { prefs ->
-            prefs[UID_KEY] = uid
-        }
-    }
-
-    suspend fun clearUid() {
-        context.userDataStore.edit { prefs ->
-            prefs.remove(UID_KEY)
-        }
-    }
 }
 
 @Preview
